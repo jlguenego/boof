@@ -6,6 +6,9 @@
   "license": "",
   "private": true,
   "dependencies": {
-    "angular": "1.4.9"
+    "angular": "1.4.9",
+    "angular-animate": "1.4.9",
+    "bootstrap": "3.3.6",
+    "angular-bootstrap": "^1.1.1"
   }
 }
