@@ -1,0 +1,23 @@
+{
+  "name": "boof",
+  "version": "0.0.1",
+  "description": "Web site allowing to easily query nutritional database",
+  "main": "app/index.html",
+  "scripts": {
+    "postinstall": "bower install",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlguenego/boof.git"
+  },
+  "author": "Jean-Louis GUENEGO, only with its broken arms",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jlguenego/boof/issues"
+  },
+  "homepage": "https://github.com/jlguenego/boof#readme",
+  "dependencies": {
+    "bower": "1.7.6"
+  }
+}

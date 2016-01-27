@@ -1,0 +1,11 @@
+{
+  "name": "boof",
+  "description": "Web site for easily querying a nutritional database",
+  "version": "0.0.1",
+  "homepage": "",
+  "license": "",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.9"
+  }
+}
