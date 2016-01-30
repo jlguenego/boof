@@ -13,7 +13,7 @@
 	</head>
 
 	<body >
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default " ng-class="{ 'navbar-fixed-top': !isMobile, 'navbar-fixed-bottom': isMobile }">
 			<div class="container-fluid" ng-init="isCollapsed = true">
 			<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -66,6 +66,13 @@
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		isMobile : {{isMobile}}
+		
+		<button ng-click="isMobile = !isMobile">Switch</button>
 
 		
 		<script src="../bower_components/angular/angular.min.js"></script>

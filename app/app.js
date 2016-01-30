@@ -8,6 +8,8 @@
 		
 		
 		$rootScope.title = 'Boof ! Calorie Citron';
+		
+		$rootScope.isMobile = ('ontouchstart' in window);
 
 	}]);
 

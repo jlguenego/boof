@@ -5,6 +5,7 @@
   "main": "app/index.html",
   "scripts": {
     "postinstall": "bower install",
+	"start": "http-server -p 8000",
     "build": "gulp build"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "homepage": "https://github.com/jlguenego/boof#readme",
   "dependencies": {
     "bower": "1.7.6"
+  },
+  "devDependencies": {
+    "http-server": "^0.8.5"
   }
 }
