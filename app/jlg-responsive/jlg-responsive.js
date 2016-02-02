@@ -7,11 +7,12 @@
 		var $rootScope = $injector.get('$rootScope');
 		var $document = $injector.get('$document');
 		console.log('jlg-responsive: run');
-		$rootScope.isMobile = ('ontouchstart' in window);
+		$rootScope.cfg = $rootScope.cfg || {};
+		$rootScope.cfg.isMobile = ('ontouchstart' in window);
 		var body = angular.element($document[0].body);
-		$rootScope.$watch('isMobile', function() {
+		$rootScope.$watch('cfg.isMobile', function() {
 			body.removeClass('jlg-mobile jlg-desktop');
-			if ($rootScope.isMobile) {
+			if ($rootScope.cfg.isMobile) {
 				body.addClass('jlg-mobile');
 			} else {
 				body.addClass('jlg-desktop');

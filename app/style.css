@@ -6,9 +6,11 @@ div.jlg-navbar {
 	border-style: solid;
 	
 	position: fixed;
+	z-index: 1030;
+	
     right: 0;
     left: 0;
-    z-index: 1030;
+    
 	min-height: 50px;
     margin-bottom: 0px;
 }

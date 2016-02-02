@@ -17,11 +17,11 @@ jlg-menu.bottom {
 	top: 0px;
 }
 
-
+/* TODO: compute the exact height */
 .jlg-desktop jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
 	width: 400px;
 	height: 1000px;
-	/* TODO: compute the exact height */
+	
 }
 
 .jlg-mobile jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {

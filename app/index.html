@@ -13,8 +13,8 @@
 		
 	</head>
 
-	<body >
-		<div class="jlg-navbar" ng-controller="jlg-menu.Ctrl as menu">
+	<body ng-controller="jlg-menu.Ctrl as menu">
+		<div class="jlg-navbar">
 			<div class="jlg-menu-button"
 				ng-click="menu.toggle()" ng-class="{active: menu.visible }">
 				<span class="icon-bar"></span>
@@ -22,14 +22,14 @@
 				<span class="icon-bar"></span>
 			</div>
 			<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
-			<jlg-menu ctrl="menu" init="menu/main.html" ng-show="menu.visible"></jlg-menu>
 		</div>
+		<jlg-menu ctrl="menu" init="menu/main.html" ng-show="menu.visible"></jlg-menu>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
-		isMobile : {{isMobile}} <button ng-click="isMobile = !isMobile">Switch</button><br/>
-		isTop : {{isTop}} <button ng-click="isTop = !isTop">Switch</button><br/>
+		isMobile : {{cfg.isMobile}} <button ng-click="cfg.isMobile = !cfg.isMobile">Switch</button><br/>
+		isTop : {{cfg.isTop}} <button ng-click="cfg.isTop = !cfg.isTop">Switch</button><br/>
 		
 		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="../bower_components/angular/angular.min.js"></script>
