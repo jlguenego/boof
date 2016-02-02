@@ -1,7 +1,8 @@
 jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
-	display: inline-block;
+	display: block;
 	position: absolute;
-	top: 0;
+	top: 50px;
+	right: 0;
 	background-color: hsla(0, 0%, 80%, 0.5);
 	z-index: 2000;
 	overflow-x: hidden;
@@ -14,17 +15,7 @@ jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
 	height: 1000px;
 }
 
-._menu {
+.jlg-mobile jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
 	width: 100%;
-	height: 100%;
-	padding: 15px;
+	height: 1000px;
 }
-
-.jlg-back {
-	cursor: pointer;
-}
-
-.jlg-desktop .jlg-back:hover {
-	color: black;
-}
-

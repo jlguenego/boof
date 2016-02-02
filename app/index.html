@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<title ng-bind="title">Boof !</title>
 		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="jlg-menu/style.css">
 		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css">
 		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css">
@@ -21,18 +22,19 @@
 				<span class="icon-bar"></span>
 			</div>
 			<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
-			<jlg-menu ng-show="menu.visible">coucou</jlg-menu>
+			<jlg-menu ctrl="menu" ng-show="menu.visible">coucou</jlg-menu>
 		</div>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
-
+		isMobile : {{isMobile}} <button ng-click="isMobile = !isMobile">Switch</button>
 		
 		<script src="../bower_components/angular/angular.min.js"></script>
 		<script src="../bower_components/angular-animate/angular-animate.js"></script>
 		<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="jlg-menu/jlg-menu.js"></script>
+		<script type="text/javascript" src="jlg-responsive/jlg-responsive.js"></script>
 	</body>
 </html>
