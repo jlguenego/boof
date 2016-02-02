@@ -1,18 +1,27 @@
-jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
+jlg-menu {
 	display: block;
-	position: absolute;
-	top: 50px;
+	position: fixed;
 	right: 0;
 	background-color: hsla(0, 0%, 80%, 0.5);
-	z-index: 2000;
+	z-index: 500;
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
 
+jlg-menu.top {
+	top: 50px;
+}
+
+jlg-menu.bottom {
+	top: 0px;
+}
+
+
 .jlg-desktop jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
 	width: 400px;
 	height: 1000px;
+	/* TODO: compute the exact height */
 }
 
 .jlg-mobile jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
