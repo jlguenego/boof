@@ -20,7 +20,8 @@
 			if (!this.visible) {
 				return;
 			}
-			this.open('tmpl/test.html');
+			console.log(this.initialPage);
+			this.open(this.initialPage);
 		};
 		
 		this.open = function(templateUrl) {
@@ -43,9 +44,10 @@
 		return {
 			restrict: 'EAC',
 			link: function(scope, element, attrs) {
-				console.log('link jlgMenuLayer', scope);
+				console.log('link jlgMenuLayer', scope, attrs);
 				var ctrl = scope[attrs.ctrl];
 				ctrl.element = element;
+				ctrl.initialPage = attrs.init;
 			}
 		};
 	}]);
