@@ -1,0 +1,30 @@
+jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	background-color: hsla(0, 0%, 80%, 0.5);
+	z-index: 2000;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.jlg-desktop jlg-menu, [jlg-menu], [data-jlg-menu], [x-jlg-menu], .jlg-menu {
+	width: 400px;
+	height: 1000px;
+}
+
+._menu {
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+}
+
+.jlg-back {
+	cursor: pointer;
+}
+
+.jlg-desktop .jlg-back:hover {
+	color: black;
+}
+

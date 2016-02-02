@@ -13,13 +13,15 @@
 	</head>
 
 	<body >
-		<div class="jlg-menu">
-			<div class="jlg-menu-button" ng-init="isActive = false" ng-click="isActive = !isActive" ng-class="{active: isActive}">
+		<div class="jlg-navbar" ng-controller="jlg-menu.Ctrl as menu">
+			<div class="jlg-menu-button"
+				ng-click="menu.toggle()" ng-class="{active: menu.visible }">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</div>
 			<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
+			<jlg-menu ng-show="menu.visible">coucou</jlg-menu>
 		</div>
 		<br/>
 		<br/>
@@ -31,5 +33,6 @@
 		<script src="../bower_components/angular-animate/angular-animate.js"></script>
 		<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="jlg-menu/jlg-menu.js"></script>
 	</body>
 </html>
