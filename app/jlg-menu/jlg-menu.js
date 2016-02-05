@@ -28,21 +28,39 @@
 				return;
 			}
 			console.log(this.initialPage);
-			this.open(this.initialPage);
+			this.open(this.initialPage, this.initialTitle);
 		};
 		
-		this.open = function(templateUrl) {
+		this.open = function(templateUrl, title) {
 			var self = this;
 			$templateRequest(templateUrl).then(function(response) {
-				div.append(response);
-				console.log('response', self.element);
+				var total = angular.element('<div class="jlg-menu-panel"></div>');
+				total.append(self.makeTitle(title));
+				total.append(response);
+				
+				
+				div.append(total);
 				$compile(div.children())($scope);
 			}).catch(function(error) {
 				console.error('error', error);
 			});
 		};
 		
+		this.makeTitle = function(title) {
+			var titleDiv = '<div class="jlg-menu-title">' + title + '</div>';
+			var close = '<div class="jlg-menu-close"><div class="glyphicon glyphicon-remove" ng-click="' + this.name + '.toggle()"></div></div>';
+			var backDiv = '<div ng-click="' + this.name + '.back()" class="jlg-menu-back">&lt;Back</div>';
+			var result = angular.element('<div class="jlg-menu-title-bar"></div>');
+			result.append(backDiv);
+			result.append(titleDiv);
+			result.append(close);
+			return result;
+			
+		};
 		
+		this.back = function() {
+			console.log('back');
+		};
 		
 		
 		
@@ -59,6 +77,8 @@
 				var ctrl = scope[attrs.ctrl];
 				ctrl.element = element;
 				ctrl.initialPage = attrs.init;
+				ctrl.initialTitle = attrs.title;
+				ctrl.name = attrs.ctrl;
 				ctrl.init();
 			}
 		};

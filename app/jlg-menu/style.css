@@ -36,3 +36,40 @@ jlg-menu.bottom {
 	width: 100%;
 	height: 1000px;
 }
+
+/* menu panel */
+.jlg-menu-frame * {
+	font-weight: bold;
+	font-size: 14px;
+    line-height: 1.42857143;
+}
+
+.jlg-menu-title-bar {
+	position: relative;
+	background-color: #337ab7;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	
+}
+
+.jlg-menu-close {
+	cursor: pointer;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 10px;
+	
+}
+
+.jlg-menu-back {
+	cursor: pointer;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 10px;
+	
+}
+
+.jlg-menu-title {
+}
