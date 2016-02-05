@@ -44,6 +44,7 @@ jlg-menu.bottom {
 /* menu panel */
 .jlg-menu-panel {
 	display: inline-block;
+	position: absolute;
 }
 
 .jlg-desktop .jlg-menu-panel {

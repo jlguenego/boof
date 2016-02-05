@@ -12,8 +12,34 @@
 	app.controller('jlg-menu.Ctrl', ['$injector', '$scope', function($injector, $scope) {
 		var $templateRequest = $injector.get('$templateRequest');
 		var $compile = $injector.get('$compile');
+		var $q = $injector.get('$q');
 		
 		var frame = angular.element('<div class="jlg-menu-frame"></div>');
+		
+		var duration = 500;
+		
+		var animate = function(element, from, to, done) {
+			element.css({
+				position: 'absolute',
+				top: 0,
+				left: from,
+				display: 'block'
+			});
+
+			jQuery(element).velocity({
+				left: to
+			}, duration, done);
+		};
+		
+		var animateAsync = function(element, from, to) {
+			return $q(function(resolve, reject) {
+				animate(element, from, to, resolve);
+			});
+		};
+		
+		var panels = [];
+		var width = 400;
+		
 		
 		this.initMenu = function() {
 			console.log('jlg-menu ctrl.initMenu');
@@ -39,13 +65,19 @@
 		this.open = function(templateUrl, title) {
 			var self = this;
 			$templateRequest(templateUrl).then(function(response) {
-				var total = angular.element('<div class="jlg-menu-panel"></div>');
-				total.append(self.makeTitle(title));
-				total.append(response);
+				var panel = angular.element('<div class="jlg-menu-panel"></div>');
+				panel.append(self.makeTitle(title));
+				panel.append(response);
 				
 				
-				frame.append(total);
-				$compile(frame.children())($scope);
+				
+				frame.append(panel);
+				panels.push({templateUrl: templateUrl, title: title});
+				panel = frame.children().eq(panels.length - 1);
+				$compile(panel)($scope);
+				return animateAsync(panel, width, 0);
+			}).then(function() {
+				console.log('animation finished.');
 			}).catch(function(error) {
 				console.error('error', error);
 			});
