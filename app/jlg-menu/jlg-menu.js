@@ -13,6 +13,13 @@
 		var $templateRequest = $injector.get('$templateRequest');
 		var $compile = $injector.get('$compile');
 		
+		var div = angular.element('<div class="jlg-menu-frame"></div>');
+		
+		this.init = function() {
+			console.log('jlg-menu ctrl.init');
+			this.element.append(div);
+		};
+		
 		this.visible = false;
 		this.toggle = function(name) {
 			console.log('toggle');
@@ -27,13 +34,17 @@
 		this.open = function(templateUrl) {
 			var self = this;
 			$templateRequest(templateUrl).then(function(response) {
-				self.element.append(response);
+				div.append(response);
 				console.log('response', self.element);
-				$compile(self.element.children())($scope);
+				$compile(div.children())($scope);
 			}).catch(function(error) {
 				console.error('error', error);
 			});
 		};
+		
+		
+		
+		
 		
 	}]);
 	
@@ -48,6 +59,7 @@
 				var ctrl = scope[attrs.ctrl];
 				ctrl.element = element;
 				ctrl.initialPage = attrs.init;
+				ctrl.init();
 			}
 		};
 	}]);
