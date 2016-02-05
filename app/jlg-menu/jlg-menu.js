@@ -57,9 +57,12 @@
 			this.reset();
 		};
 		
+		var isFirstTime = true;
 		this.reset = function() {
-			
-			this.open(this.initialPage, this.initialTitle);
+			if (isFirstTime) {
+				this.open(this.initialPage, this.initialTitle);
+			}
+			isFirstTime = false;
 		};
 		
 		this.open = function(templateUrl, title) {
@@ -68,8 +71,6 @@
 				var panel = angular.element('<div class="jlg-menu-panel"></div>');
 				panel.append(self.makeTitle(title));
 				panel.append(response);
-				
-				
 				
 				frame.append(panel);
 				panels.push({templateUrl: templateUrl, title: title});
