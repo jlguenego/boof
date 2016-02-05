@@ -15,6 +15,10 @@ jlg-menu {
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
+	
+	font-weight: bold;
+	font-size: 14px;
+    line-height: 1.42857143;
 }
 
 jlg-menu.top {
@@ -27,7 +31,7 @@ jlg-menu.bottom {
 
 /* TODO: compute the exact height */
 .jlg-desktop .jlg-menu-frame {
-	width: 400px;
+	width: 800px;
 	height: 1000px;
 	
 }
@@ -38,10 +42,16 @@ jlg-menu.bottom {
 }
 
 /* menu panel */
-.jlg-menu-frame * {
-	font-weight: bold;
-	font-size: 14px;
-    line-height: 1.42857143;
+.jlg-menu-panel {
+	display: inline-block;
+}
+
+.jlg-desktop .jlg-menu-panel {
+	width: 400px;
+}
+
+.jlg-mobile .jlg-menu-panel {
+	width: 100%;
 }
 
 .jlg-menu-title-bar {

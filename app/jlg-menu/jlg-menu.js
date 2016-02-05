@@ -13,11 +13,11 @@
 		var $templateRequest = $injector.get('$templateRequest');
 		var $compile = $injector.get('$compile');
 		
-		var div = angular.element('<div class="jlg-menu-frame"></div>');
+		var frame = angular.element('<div class="jlg-menu-frame"></div>');
 		
-		this.init = function() {
-			console.log('jlg-menu ctrl.init');
-			this.element.append(div);
+		this.initMenu = function() {
+			console.log('jlg-menu ctrl.initMenu');
+			this.element.append(frame);
 		};
 		
 		this.visible = false;
@@ -28,6 +28,11 @@
 				return;
 			}
 			console.log(this.initialPage);
+			this.reset();
+		};
+		
+		this.reset = function() {
+			
 			this.open(this.initialPage, this.initialTitle);
 		};
 		
@@ -39,8 +44,8 @@
 				total.append(response);
 				
 				
-				div.append(total);
-				$compile(div.children())($scope);
+				frame.append(total);
+				$compile(frame.children())($scope);
 			}).catch(function(error) {
 				console.error('error', error);
 			});
@@ -48,14 +53,13 @@
 		
 		this.makeTitle = function(title) {
 			var titleDiv = '<div class="jlg-menu-title">' + title + '</div>';
-			var close = '<div class="jlg-menu-close"><div class="glyphicon glyphicon-remove" ng-click="' + this.name + '.toggle()"></div></div>';
+			var closeDiv = '<div class="jlg-menu-close"><div class="glyphicon glyphicon-remove" ng-click="' + this.name + '.toggle()"></div></div>';
 			var backDiv = '<div ng-click="' + this.name + '.back()" class="jlg-menu-back">&lt;Back</div>';
 			var result = angular.element('<div class="jlg-menu-title-bar"></div>');
 			result.append(backDiv);
 			result.append(titleDiv);
-			result.append(close);
+			result.append(closeDiv);
 			return result;
-			
 		};
 		
 		this.back = function() {
@@ -79,7 +83,7 @@
 				ctrl.initialPage = attrs.init;
 				ctrl.initialTitle = attrs.title;
 				ctrl.name = attrs.ctrl;
-				ctrl.init();
+				ctrl.initMenu();
 			}
 		};
 	}]);
