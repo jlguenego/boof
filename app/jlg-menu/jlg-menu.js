@@ -67,6 +67,7 @@
 		
 		this.open = function(templateUrl, title) {
 			var self = this;
+			title = title || 'Warning: no title!';
 			$templateRequest(templateUrl).then(function(response) {
 				var panel = angular.element('<div class="jlg-menu-panel"></div>');
 				panel.append(self.makeTitle(title));
@@ -85,13 +86,14 @@
 		};
 		
 		this.makeTitle = function(title) {
-			var titleDiv = '<div class="jlg-menu-title">' + title + '</div>';
+			var titleDiv = angular.element('<div class="jlg-menu-title">' + title + '</div>');
 			var closeDiv = '<div class="jlg-menu-close"><div class="glyphicon glyphicon-remove" ng-click="' + this.name + '.toggle()"></div></div>';
 			var backDiv = '<div ng-click="' + this.name + '.back()" class="jlg-menu-back">&lt;Back</div>';
 			var result = angular.element('<div class="jlg-menu-title-bar"></div>');
 			result.append(backDiv);
 			result.append(titleDiv);
 			result.append(closeDiv);
+			$scope.titleDiv = titleDiv;
 			return result;
 		};
 		
@@ -121,4 +123,16 @@
 		};
 	}]);
 
+	app.directive('jlgMenuTitle', ['$injector', function($injector) {
+		var $templateRequest = $injector.get('$templateRequest');
+		var $compile = $injector.get('$compile');
+
+		return {
+			restrict: 'EAC',
+			link: function(scope, element, attrs) {
+				console.log('link jlgMenuTitle', scope, attrs);
+				scope.titleDiv.html(attrs['jlgMenuTitle']);
+			}
+		};
+	}]);
 })();
