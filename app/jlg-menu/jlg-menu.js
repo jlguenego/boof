@@ -77,6 +77,10 @@
 				panels.push({templateUrl: templateUrl, title: title});
 				panel = frame.children().eq(panels.length - 1);
 				$compile(panel)($scope);
+				if (panels.length > 1) {
+					var previousPanel = frame.children().eq(panels.length - 2);
+					animateAsync(previousPanel, 0, -width);
+				}
 				return animateAsync(panel, width, 0);
 			}).then(function() {
 				console.log('animation finished.');
