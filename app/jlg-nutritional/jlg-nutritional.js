@@ -6,14 +6,16 @@
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
 		console.log('jlg-nutritional: run');
-		$rootScope.aliments = [
+		$rootScope.nu = {};
+		$rootScope.nu.aliment = undefined;
+		$rootScope.nu.aliments = [
 			'Citron',
 			'Orange',
 			'Banane'
 		];
 		
 		$rootScope.searchForAliment = function() {
-			console.log('searchForAliment', $rootScope.aliment);
+			console.log('searchForAliment', $rootScope.nu.aliment);
 		};
 	}]);
 	
