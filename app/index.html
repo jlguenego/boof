@@ -29,7 +29,7 @@
 					<label for="aliment" class="control-label">Rechercher un aliment</label>
 					<input id="aliment" type="text" ng-model="nu.aliment" class="form-control"
 						uib-typeahead="aliment for aliment in nu.aliments | filter:$viewValue | limitTo:8" 
-						typeahead-editable="no" autocomplete="off"/>
+						typeahead-editable="false" typeahead-min-length="0" autocomplete="off"/>
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				</div>
 			</form>
@@ -44,6 +44,7 @@
 		<br/>
 		<br/>
 		<br/>
+		Aliment: {{nu.aliment}}</br>
 		isMobile : {{cfg.isMobile}} <button ng-click="cfg.isMobile = !cfg.isMobile">Switch</button><br/>
 		isTop : {{cfg.isTop}} <button ng-click="cfg.isTop = !cfg.isTop">Switch</button><br/>
 		
