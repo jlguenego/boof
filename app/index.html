@@ -23,7 +23,22 @@
 			</div>
 			<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
 		</div>
+		<div class="jlg-searchbar container-fluid">
+			<form name="searchForm" ng-submit="searchForAliment()" novalidate>
+				<div class="form-group has-feedback">
+					<label for="aliment" class="control-label">Rechercher un aliment</label>
+					<input id="aliment" type="text" ng-model="aliment" class="form-control"
+						uib-typeahead="aliment for aliment in aliments | filter:$viewValue | limitTo:8" autocomplete="off"/>
+					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+				</div>
+			</form>
+		</div>
 		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
 		<br/>
 		<br/>
 		<br/>
@@ -39,5 +54,6 @@
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="jlg-menu/jlg-menu.js"></script>
 		<script type="text/javascript" src="jlg-responsive/jlg-responsive.js"></script>
+		<script type="text/javascript" src="jlg-nutritional/jlg-nutritional.js"></script>
 	</body>
 </html>
