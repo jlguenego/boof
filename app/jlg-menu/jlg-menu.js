@@ -105,6 +105,12 @@
 		
 		this.back = function() {
 			console.log('back');
+			var panel = frame.children().eq(panels.length - 1);
+			var previousPanel = frame.children().eq(panels.length - 2);
+			animateAsync(panel, 0, width);
+			return animateAsync(previousPanel, -width, 0).then(function() {
+				frame.children().eq(panels.length - 1).remove();
+			});
 		};
 		
 		
