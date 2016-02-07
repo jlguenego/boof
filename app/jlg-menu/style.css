@@ -31,7 +31,7 @@ jlg-menu.bottom {
 
 /* TODO: compute the exact height */
 .jlg-desktop .jlg-menu-frame {
-	width: 800px;
+	width: 400px;
 	height: 1000px;
 	
 }
