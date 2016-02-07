@@ -43,7 +43,9 @@
 		
 		this.initMenu = function() {
 			console.log('jlg-menu ctrl.initMenu');
+			frame.attr('ng-click', this.name + '.toggle()');
 			this.element.append(frame);
+			$compile(frame)($scope);
 		};
 		
 		this.visible = false;
