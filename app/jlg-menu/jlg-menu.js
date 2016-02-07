@@ -73,7 +73,7 @@
 			panels.push({templateUrl: templateUrl, title: title});
 			
 			$templateRequest(templateUrl).then(function(response) {
-				var panel = angular.element('<div class="jlg-menu-panel"></div>');
+				var panel = angular.element('<div class="jlg-menu-panel" ng-click="$event.stopPropagation()"></div>');
 				panel.append(self.makeTitle(title));
 				panel.append(response);
 				frame.append(panel);
