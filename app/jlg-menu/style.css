@@ -11,7 +11,7 @@ jlg-menu {
 	position: absolute;
 	right: 0;
 	/* margin: 0 auto; */
-	background-color: hsla(0, 0%, 80%, 0.5);
+	background-color: hsla(0, 0%, 90%, 0.5);
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
@@ -82,5 +82,19 @@ jlg-menu.bottom {
 	
 }
 
-.jlg-menu-title {
+.jlg-menu-panel ul {
+	margin: 0px;
+	padding: 0px;
+	border-color: #dddddd;;
+	border-style: solid;
+	border-width: 1px 0px 0px 0px;
+}
+
+.jlg-menu-panel li {
+	list-style-type: none;
+	background-color: white;
+	padding: 10px;
+	border-color: #dddddd;;
+	border-style: solid;
+	border-width: 0px 0px 1px 0px;
 }
