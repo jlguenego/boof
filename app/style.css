@@ -1,3 +1,7 @@
+* {
+	font-size: 16px;
+}
+
 /* Menu */
 
 div.jlg-navbar {
@@ -90,6 +94,21 @@ div.jlg-searchbar.bottom {
 div.jlg-searchbar.top {
 	top: 51px;
 	border-width: 0 0 1px;
+}
+
+/* uib-typeahead-popup */
+[uib-typeahead-popup]>li>a {
+	font-size: 24px;
+	padding: 6px 20px;
+}
+
+[uib-typeahead-popup]>li>a>strong {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+[uib-typeahead-popup] li {
+	
 }
 
 
