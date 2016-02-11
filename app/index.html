@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
 		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
+		<link rel="stylesheet" href="../bower_components/json-formatter/dist/json-formatter.min.css" />
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="jlg-menu/style.css" />
 		<link rel="stylesheet" href="jlg-typeahead/style.css" />
@@ -28,7 +29,7 @@
 				<div class="form-group has-feedback">
 					<label for="aliment" class="control-label">Rechercher un aliment</label>
 					<input id="aliment" type="text" ng-model="nu.aliment" class="form-control"
-						jlg-typeahead="{ select: 'aliment in nu.aliments | filter: nu.aliment', object: 'aliment' }" 
+						jlg-typeahead="{ select: 'aliment in nu.aliments | filter: nu.aliment track by $index', object: 'aliment' }" 
 						autocomplete="off"/>
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				</div>
@@ -48,11 +49,16 @@
 		isMobile : {{cfg.isMobile}} <button ng-click="cfg.isMobile = !cfg.isMobile">Switch</button><br/>
 		isTop : {{cfg.isTop}} <button ng-click="cfg.isTop = !cfg.isTop">Switch</button><br/>
 		
+		Aliment Data:
+		<json-formatter open="1" json="nu.alimentData"></json-formatter><br/>
+		
 		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="../bower_components/velocity/velocity.min.js"></script>
+		<script src="../bower_components/papaparse/papaparse.min.js"></script>
 		<script src="../bower_components/angular/angular.min.js"></script>
 		<script src="../bower_components/angular-animate/angular-animate.js"></script>
 		<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+		<script src="../bower_components/json-formatter/dist/json-formatter.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="jlg-menu/jlg-menu.js"></script>
 		<script type="text/javascript" src="jlg-responsive/jlg-responsive.js"></script>

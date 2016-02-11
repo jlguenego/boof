@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var app = angular.module('mainApp', ['ui.bootstrap', 'jlg-menu', 'jlg-nutritional', 'jlg-typeahead']);
+	var app = angular.module('mainApp', ['ui.bootstrap', 'jsonFormatter', 'jlg-menu', 'jlg-nutritional', 'jlg-typeahead']);
 	
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
