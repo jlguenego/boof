@@ -20,17 +20,46 @@
 				console.log('link jlgTypeahead', scope, element, attrs);
 				var spec = scope.$eval(attrs.jlgTypeahead);
 				console.log('spec', spec);
-				scope.isPopupVisible = true;
+				
+				scope.isPopupVisible = false;
+				scope.isMouseInPopup = false;
+				
+				element.on('focus', function() {
+					scope.isPopupVisible = true;
+					scope.$apply();
+				});
+				
+				element.on('blur', function() {
+					scope.isPopupVisible = scope.isMouseInPopup;
+					scope.$apply();
+				});
+				
 				scope.togglePopup = function($event) {
-					console.log('togglePopup');
 					$event.preventDefault();
 					scope.isPopupVisible = !scope.isPopupVisible;
 				};
-				var popup = angular.element('<div class="jlg-typeahead-popup"><button ng-click="togglePopup($event);">coucou</button></div>');
-				popup.append('<div ng-show="isPopupVisible" ng-repeat="' + spec.select + '" jlg-active>{{' + spec.title + '}}</div>');
+				
+				scope.selectItem = function(item) {
+					element.val(item);
+					element.trigger('input');
+					
+					scope.isPopupVisible = false;
+				};
+				
+				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
+				popup.append('<div ng-repeat="' + spec.select + '" ng-click="selectItem(' + spec.object + ')" jlg-active>{{' + spec.object + '}}</div>');
 				console.log('popup', popup);
 				element.after(popup);
 				$compile(popup)(scope);
+				
+				popup.on('mouseenter', function() {
+					scope.isMouseInPopup = true;
+					scope.$apply();
+				});
+				popup.on('mouseleave', function() {
+					scope.isMouseInPopup = false;
+					scope.$apply();
+				});
 			}
 		};
 	}]);
@@ -46,6 +75,15 @@
 					element.addClass('active');
 				});
 				element.bind('mouseleave', function(e) {
+					element.removeClass('active');
+				});
+				
+				// for tactile interface
+				element.bind('touchstart', function(e) {
+					element.addClass('active');
+				});
+				
+				element.bind('touchend', function(e) {
 					element.removeClass('active');
 				});
 			}

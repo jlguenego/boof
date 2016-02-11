@@ -1,3 +1,8 @@
+.jlg-typeahead-popup {
+	width: 300px;
+	border: 1px solid black;
+}
+
 .jlg-typeahead-popup * {
 	font-size: 20px;
 }
