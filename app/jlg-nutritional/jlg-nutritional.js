@@ -11,7 +11,14 @@
 		$rootScope.nu.aliments = [
 			'Citron',
 			'Orange',
-			'Banane'
+			'Banane',
+			'Mangue',
+			'Concombre',
+			'Riz',
+			'Raisin',
+			'Cacao',
+			'Fraise',
+			'Pomme'
 		];
 		
 		$rootScope.searchForAliment = function() {

@@ -1,0 +1,8 @@
+.jlg-typeahead-popup * {
+	font-size: 20px;
+}
+
+.jlg-typeahead-popup .active {
+	background-color: #337ab7;
+	color: white;
+}
