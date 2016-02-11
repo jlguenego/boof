@@ -5,11 +5,12 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<title ng-bind="title">Boof !</title>
-		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css">
-		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css">
-		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="jlg-menu/style.css">
+		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="jlg-menu/style.css" />
+		<link rel="stylesheet" href="jlg-typeahead/style.css" />
 	</head>
 
 	<body ng-controller="jlg-menu.Ctrl as menu">
@@ -27,8 +28,8 @@
 				<div class="form-group has-feedback">
 					<label for="aliment" class="control-label">Rechercher un aliment</label>
 					<input id="aliment" type="text" ng-model="nu.aliment" class="form-control"
-						uib-typeahead="aliment for aliment in nu.aliments | filter:$viewValue | limitTo:8" 
-						typeahead-editable="false" typeahead-min-length="0" autocomplete="off"/>
+						jlg-typeahead="{ select: 'aliment for aliment in nu.aliments | filter:$viewValue | limitTo:8' }" 
+						autocomplete="off"/>
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				</div>
 			</form>
@@ -56,5 +57,6 @@
 		<script type="text/javascript" src="jlg-menu/jlg-menu.js"></script>
 		<script type="text/javascript" src="jlg-responsive/jlg-responsive.js"></script>
 		<script type="text/javascript" src="jlg-nutritional/jlg-nutritional.js"></script>
+		<script type="text/javascript" src="jlg-typeahead/jlg-typeahead.js"></script>
 	</body>
 </html>
