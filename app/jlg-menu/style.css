@@ -107,7 +107,7 @@ jlg-menu.bottom {
 	font-size: 16px;
 }
 
-.jlg-menu-panel li:hover {
+.jlg-menu-panel li[jlg-menu-directory]:hover {
 	color: #23527c;
 	text-decoration: underline;
 }

@@ -12,6 +12,13 @@
 		$rootScope.cfg = $rootScope.cfg || {};
 		$rootScope.cfg.isMobile = ('ontouchstart' in window);
 		$rootScope.cfg.screen = window.screen;
+		$rootScope.cfg.window = { width: $(window).width(), height: $(window).height() };
+		$(window).on('resize', function() {
+			$rootScope.cfg.window.width = $(window).width();
+			$rootScope.cfg.window.height = $(window).height();
+			$rootScope.$apply();
+		});
+		
 		var body = angular.element($document[0].body);
 		$rootScope.$watch('cfg.isMobile', function() {
 			body.removeClass('jlg-mobile jlg-desktop');
