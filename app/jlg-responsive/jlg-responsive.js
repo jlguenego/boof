@@ -6,9 +6,12 @@
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
 		var $document = $injector.get('$document');
+		var $window = $injector.get('$window');
+		
 		console.log('jlg-responsive: run');
 		$rootScope.cfg = $rootScope.cfg || {};
 		$rootScope.cfg.isMobile = ('ontouchstart' in window);
+		$rootScope.cfg.screen = window.screen;
 		var body = angular.element($document[0].body);
 		$rootScope.$watch('cfg.isMobile', function() {
 			body.removeClass('jlg-mobile jlg-desktop');

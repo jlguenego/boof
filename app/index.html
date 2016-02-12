@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="jlg-menu/style.css" />
 		<link rel="stylesheet" href="jlg-typeahead/style.css" />
+		<link rel="stylesheet" href="jlg-checkbox/style.css" />
 	</head>
 
 	<body ng-controller="jlg-menu.Ctrl as menu">
@@ -47,7 +48,7 @@
 		<br/>
 		<br/>
 		Aliment: {{nu.aliment}}</br>
-		isMobile : {{cfg.isMobile}} <button ng-click="cfg.isMobile = !cfg.isMobile">Switch</button><br/>
+		$window : {{cfg.$window}}<br/>
 		isTop : {{cfg.isTop}} <button ng-click="cfg.isTop = !cfg.isTop">Switch</button><br/>
 		
 		Aliment Data:
@@ -60,10 +61,12 @@
 		<script src="../bower_components/angular-animate/angular-animate.js"></script>
 		<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script src="../bower_components/json-formatter/dist/json-formatter.min.js"></script>
+		<script src="../bower_components/fastclick/lib/fastclick.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="jlg-menu/jlg-menu.js"></script>
 		<script type="text/javascript" src="jlg-responsive/jlg-responsive.js"></script>
 		<script type="text/javascript" src="jlg-nutritional/jlg-nutritional.js"></script>
 		<script type="text/javascript" src="jlg-typeahead/jlg-typeahead.js"></script>
+		<script type="text/javascript" src="jlg-checkbox/jlg-checkbox.js"></script>
 	</body>
 </html>

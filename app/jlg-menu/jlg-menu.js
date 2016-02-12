@@ -72,7 +72,7 @@
 			title = title || 'Warning: no title!';
 			panels.push({templateUrl: templateUrl, title: title});
 			
-			$templateRequest(templateUrl).then(function(response) {
+			$templateRequest(templateUrl + '?' + new Date().getTime()).then(function(response) {
 				var panel = angular.element('<div class="jlg-menu-panel" ng-click="$event.stopPropagation()"></div>');
 				panel.append(self.makeTitle(title));
 				panel.append(response);
@@ -150,4 +150,17 @@
 			}
 		};
 	}]);
+	
+	app.directive('jlgMenuDirectory', ['$injector', function($injector) {
+		var $templateRequest = $injector.get('$templateRequest');
+		var $compile = $injector.get('$compile');
+
+		return {
+			restrict: 'EAC',
+			link: function(scope, element, attrs) {
+				element.append('<span class="pull-right glyphicon glyphicon-chevron-right"></span>');
+			}
+		};
+	}]);
+	
 })();

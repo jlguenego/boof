@@ -15,10 +15,8 @@ jlg-menu {
 	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
-	
-	font-weight: bold;
     line-height: 1.42857143;
-	font-size: 16px;
+	
 }
 
 jlg-menu.top {
@@ -61,6 +59,8 @@ jlg-menu.bottom {
 	color: white;
 	padding: 10px;
 	text-align: center;
+	font-weight: bold;
+	font-size: 16px;
 	
 }
 
@@ -91,10 +91,29 @@ jlg-menu.bottom {
 }
 
 .jlg-menu-panel li {
+	display: table;
+    width: 100%;
 	list-style-type: none;
 	background-color: white;
 	padding: 10px;
 	border-color: #dddddd;;
 	border-style: solid;
 	border-width: 0px 0px 1px 0px;
+	color: #337ab7;
+}
+
+.jlg-menu-panel li[jlg-menu-directory] {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.jlg-menu-panel li:hover {
+	color: #23527c;
+	text-decoration: underline;
+}
+
+.jlg-menu-item-label {
+	display: table-cell;
+    vertical-align: middle;
+    width: 100%;
 }
