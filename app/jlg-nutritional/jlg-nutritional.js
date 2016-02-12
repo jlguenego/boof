@@ -48,7 +48,7 @@
 				withCredentials: undefined
 			});
 			
-			$rootScope.nu.aliments = $rootScope.data.data.map(function(n) { return n.ORIGFDNM; });
+			$rootScope.nu.aliments = $rootScope.data.data.map(function(n) { return n.ORIGFDNM; }).sort();
 
 			$rootScope.$watch('nu.aliment', function() {
 				$rootScope.nu.alimentData = $rootScope.data.data.find(function(n) { return n.ORIGFDNM == $rootScope.nu.aliment; });
