@@ -18,6 +18,11 @@
 			$rootScope.cfg.window.height = $(window).height();
 			$rootScope.$apply();
 		});
+		$(window).on('resize', function() {
+			$rootScope.cfg.window.width = $(window).width();
+			$rootScope.cfg.window.height = $(window).height();
+			$rootScope.$apply();
+		});
 		
 		var body = angular.element($document[0].body);
 		$rootScope.$watch('cfg.isMobile', function() {
