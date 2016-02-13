@@ -18,8 +18,6 @@
 			scope: true,
 			link: function(scope, element, attrs) {
 				console.log('link jlgTypeahead', scope, element, attrs);
-				var spec = scope.$eval(attrs.jlgTypeahead);
-				console.log('spec', spec);
 				
 				scope.isPopupVisible = false;
 				scope.isMouseInPopup = false;
@@ -45,9 +43,9 @@
 					
 					scope.isPopupVisible = false;
 				};
-				
+			
 				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
-				popup.append('<div ng-repeat="' + spec.select + '" ng-click="selectItem(' + spec.object + ')" jlg-active>{{' + spec.object + '}}</div>');
+				popup.append('<div ng-repeat="item in ' + attrs.jlgTypeahead + ' | filter: ' + attrs.ngModel + ' | limitTo: 8 track by $index" ng-click="selectItem(item)" jlg-active>{{item}}</div>');
 				console.log('popup', popup);
 				element.after(popup);
 				$compile(popup)(scope);
@@ -60,6 +58,15 @@
 					scope.isMouseInPopup = false;
 					scope.$apply();
 				});
+				// Todo: faire un jlgLimitTo qui stocke dans le scope le nbre de valeur dans le tableau
+				// si il exceed 8 alors faire un lien sur tous les resultats.
+/* 				scope.$watch(attrs.jlgTypeahead + ' | filter: ' + attrs.ngModel, function(newValue, oldValue) {
+					if (newValue.length > 7) {
+						popup.addClass('scroll');
+					} else {
+						popup.removeClass('scroll');
+					}
+				}); */
 			}
 		};
 	}]);
@@ -89,5 +96,4 @@
 			}
 		};
 	}]);
-
 })();

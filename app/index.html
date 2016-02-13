@@ -31,7 +31,7 @@
 				<div class="form-group has-feedback">
 					<input id="aliment" type="text" ng-model="nu.aliment" class="form-control"
 						placeholder="Rechercher un aliment"
-						jlg-typeahead="{ select: 'aliment in nu.aliments | filter: nu.aliment | limitTo: 8 track by $index', object: 'aliment' }" 
+						jlg-typeahead="nu.aliments" 
 						autocomplete="off"/>
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				</div>
