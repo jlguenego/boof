@@ -11,7 +11,7 @@
 		$rootScope.title = 'Boof ! Calorie Citron';
 
 		$rootScope.cfg = $rootScope.cfg || {};
-		$rootScope.cfg.isTop = true;
+		$rootScope.cfg.isTop = ! $rootScope.cfg.isMobile;
 		
 		$rootScope.$watch('cfg.isTop', function() {
 			console.log('watch cfg.isTop');

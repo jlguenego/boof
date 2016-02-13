@@ -29,8 +29,8 @@
 		<div class="jlg-searchbar container-fluid">
 			<form name="searchForm" ng-submit="searchForAliment()" novalidate>
 				<div class="form-group has-feedback">
-					<label for="aliment" class="control-label">Rechercher un aliment</label>
 					<input id="aliment" type="text" ng-model="nu.aliment" class="form-control"
+						placeholder="Rechercher un aliment"
 						jlg-typeahead="{ select: 'aliment in nu.aliments | filter: nu.aliment | limitTo: 8 track by $index', object: 'aliment' }" 
 						autocomplete="off"/>
 					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
