@@ -28,6 +28,10 @@
 				$('jlg-menu').addClass('bottom');
 			}
 		});
+		
+		$rootScope.moreResults = function(aliment) {
+			console.log('$rootScope.moreResults', aliment);
+		}
 	}]);
 
 })();
