@@ -7,6 +7,7 @@
 
 .jlg-typeahead-popup.longlist {
 	border: 1px solid red;
+	height: 400px;
 }
 
 .jlg-typeahead-popup div {

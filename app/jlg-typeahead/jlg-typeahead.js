@@ -15,25 +15,37 @@
 		var filterFilter = $injector.get('filterFilter');
 		
 		return {
+			require: 'ngModel',
 			restrict: 'EAC',
 			scope: true,
-			link: function(scope, element, attrs) {
-				console.log('link jlgTypeahead', scope, element, attrs);
+			link: function(scope, element, attrs, ctrl) {
+				console.log('link jlgTypeahead', scope, element, attrs, ctrl);
 				
 				scope.isPopupVisible = false;
 				scope.isMouseInPopup = false;
+				scope.activeItem = undefined;
+				scope.list = undefined;
+				scope.filteredList = undefined;
+				scope.inputValue = undefined;
 				
 				element.on('focus', function() {
 					if (scope.$eval(attrs.ngModel) == undefined) {
 						// force the watch the first time by updating the ngModel from undefined to ''.
 						scope.$eval(attrs.ngModel + '=""');
 					}
+					if (scope.activeItem == undefined) {
+						// force the watch the first time by updating.
+						scope.activeItem = 0;
+					}
 					scope.isPopupVisible = true;
 					scope.$apply();
 				});
 				
 				element.on('blur', function() {
-					scope.isPopupVisible = scope.isMouseInPopup;
+					if (scope.isMouseInPopup) {
+						return;
+					}
+					scope.selectItem();
 					scope.$apply();
 				});
 				
@@ -42,10 +54,9 @@
 					scope.isPopupVisible = !scope.isPopupVisible;
 				};
 				
-				scope.selectItem = function(item) {
-					element.val(item);
+				scope.selectItem = function() {
+					element.val(scope.filteredList[scope.activeItem]);
 					element.trigger('input');
-					
 					scope.isPopupVisible = false;
 				};
 				
@@ -58,8 +69,8 @@
 				scope.isLongList = false;
 			
 				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
-				popup.append('<div ng-repeat="item in ' + attrs.jlgTypeahead + ' | filter: ' + attrs.ngModel + ' | limitTo: 8 track by $index" ng-click="selectItem(item)" jlg-active>{{item}}</div>');
-				popup.append('<div ng-show="isLongList" class="moreResults" ng-click="$$moreResults(' + attrs.ngModel + ')">Afficher plus de résultats</div>');
+				popup.append('<div ng-repeat="item in ' + attrs.jlgTypeahead + ' | filter: inputValue track by $index" ng-click="selectItem()" jlg-active>{{item}}</div>');
+				//popup.append('<div ng-show="isLongList" class="moreResults" ng-click="$$moreResults(' + attrs.ngModel + ')">Afficher plus de résultats</div>');
 				popup.append('<div ng-show="noResultFound" class="noResultFound">Aucun résultat trouvé</div>');
 				console.log('popup', popup);
 				element.after(popup);
@@ -74,12 +85,13 @@
 					scope.$apply();
 				});
 				
-				scope.$watch(attrs.ngModel, function(newValue, oldValue) {
-					var list = scope.$eval(attrs.jlgTypeahead);
-					var filteredList = filterFilter(scope.$eval(attrs.jlgTypeahead), newValue);
-					scope.noResultFound = (filteredList.length == 0);
+				scope.$watch('inputValue', function(newValue, oldValue) {
+					console.log('watch inputValue', newValue);
+					scope.list = scope.$eval(attrs.jlgTypeahead);
+					scope.filteredList = filterFilter(scope.list, newValue);
+					scope.noResultFound = (scope.filteredList.length == 0);
 					
-					if (filteredList.length > 8) {
+					if (scope.filteredList.length > 8) {
 						popup.addClass('longlist');
 						scope.isLongList = true;
 					} else {
@@ -87,6 +99,23 @@
 						scope.isLongList = false;
 					}
 				});
+				
+				scope.$watch('activeItem', function(newValue, oldValue) {
+					console.log('scope.activeItem', scope.activeItem);
+					popup.children().eq(newValue).addClass('active');
+					popup.children().eq(oldValue).removeClass('active');
+				});
+				
+				//validator
+				ctrl.$validators.inArray = function(modelValue, viewValue) {
+					console.log('validator', viewValue);
+					scope.inputValue = viewValue;
+					if (ctrl.$isEmpty(modelValue)) {
+						// consider empty models to be invalid
+						return false;
+					}
+					return ($.inArray(viewValue, scope.list) >= 0);
+				};
 			}
 		};
 	}]);
@@ -98,21 +127,20 @@
 		return {
 			restrict: 'A',
 			link: function(scope, element, attrs) {
+				
+				
 				element.bind('mouseenter', function(e) {
-					element.addClass('active');
-				});
-				element.bind('mouseleave', function(e) {
-					element.removeClass('active');
+					scope.$parent.activeItem = scope.$index;
+					scope.$apply();
 				});
 				
 				// for tactile interface
 				element.bind('touchstart', function(e) {
-					element.addClass('active');
+					scope.$parent.activeItem = scope.$index;
+					scope.$apply();
 				});
 				
-				element.bind('touchend', function(e) {
-					element.removeClass('active');
-				});
+				
 			}
 		};
 	}]);

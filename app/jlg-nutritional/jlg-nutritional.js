@@ -42,6 +42,7 @@
 
 			$rootScope.$watch('nu.aliment', function() {
 				$rootScope.nu.alimentData = $rootScope.data.data.find(function(n) { return n.ORIGFDNM === $rootScope.nu.aliment; });
+				console.log('$rootScope.nu.aliment', $rootScope.nu.aliment);
 				console.log('$rootScope.nu.alimentData', $rootScope.nu.alimentData);
 				$rootScope.nu.alimentDataTable = object2array($rootScope.nu.alimentData);
 			});
