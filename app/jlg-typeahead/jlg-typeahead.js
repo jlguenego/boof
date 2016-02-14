@@ -52,7 +52,7 @@
 				scope.$$moreResults = function(filter) {
 					console.log('moreResults', filter);
 					scope.isPopupVisible = false;
-					scope.$eval(attrs.moreResults + '(' + filter + ')');
+					scope.$eval(attrs.moreResults + '("' + filter + '")');
 				};
 				
 				scope.isLongList = false;
