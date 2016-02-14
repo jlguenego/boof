@@ -5,13 +5,17 @@
 	overflow-x: auto;
 }
 
-.jlg-typeahead-popup.scroll {
-	height: 400px;
+.jlg-typeahead-popup.longlist {
+	border: 1px solid red;
 }
 
 .jlg-typeahead-popup div {
 	font-size: 20px;
 	white-space: nowrap;
+}
+
+.jlg-typeahead-popup div.moreResults {
+	background-color: red;
 }
 
 .jlg-typeahead-popup .active {

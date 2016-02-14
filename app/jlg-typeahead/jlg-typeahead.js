@@ -12,6 +12,7 @@
 	app.directive('jlgTypeahead', ['$injector', function($injector) {
 		var $compile = $injector.get('$compile');
 		var $q = $injector.get('$q');
+		var filterFilter = $injector.get('filterFilter');
 		
 		return {
 			restrict: 'EAC',
@@ -23,6 +24,10 @@
 				scope.isMouseInPopup = false;
 				
 				element.on('focus', function() {
+					if (scope.$eval(attrs.ngModel) == undefined) {
+						// force the watch the first time by updating the ngModel from undefined to ''.
+						scope.$eval(attrs.ngModel + '=""');
+					}
 					scope.isPopupVisible = true;
 					scope.$apply();
 				});
@@ -43,9 +48,12 @@
 					
 					scope.isPopupVisible = false;
 				};
+				
+				scope.isLongList = false;
 			
 				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
 				popup.append('<div ng-repeat="item in ' + attrs.jlgTypeahead + ' | filter: ' + attrs.ngModel + ' | limitTo: 8 track by $index" ng-click="selectItem(item)" jlg-active>{{item}}</div>');
+				popup.append('<div ng-show="isLongList" class="moreResults">More results</div>');
 				console.log('popup', popup);
 				element.after(popup);
 				$compile(popup)(scope);
@@ -58,15 +66,18 @@
 					scope.isMouseInPopup = false;
 					scope.$apply();
 				});
-				// Todo: faire un jlgLimitTo qui stocke dans le scope le nbre de valeur dans le tableau
-				// si il exceed 8 alors faire un lien sur tous les resultats.
-/* 				scope.$watch(attrs.jlgTypeahead + ' | filter: ' + attrs.ngModel, function(newValue, oldValue) {
-					if (newValue.length > 7) {
-						popup.addClass('scroll');
+				
+				scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+					var list = scope.$eval(attrs.jlgTypeahead);
+					var filteredList = filterFilter(scope.$eval(attrs.jlgTypeahead), newValue);
+					if (filteredList.length > 7) {
+						popup.addClass('longlist');
+						scope.isLongList = true;
 					} else {
-						popup.removeClass('scroll');
+						popup.removeClass('longlist');
+						scope.isLongList = false;
 					}
-				}); */
+				});
 			}
 		};
 	}]);
