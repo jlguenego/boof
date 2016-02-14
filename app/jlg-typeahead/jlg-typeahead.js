@@ -60,6 +60,7 @@
 				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
 				popup.append('<div ng-repeat="item in ' + attrs.jlgTypeahead + ' | filter: ' + attrs.ngModel + ' | limitTo: 8 track by $index" ng-click="selectItem(item)" jlg-active>{{item}}</div>');
 				popup.append('<div ng-show="isLongList" class="moreResults" ng-click="$$moreResults(' + attrs.ngModel + ')">Afficher plus de résultats</div>');
+				popup.append('<div ng-show="noResultFound" class="noResultFound">Aucun résultat trouvé</div>');
 				console.log('popup', popup);
 				element.after(popup);
 				$compile(popup)(scope);
@@ -76,6 +77,8 @@
 				scope.$watch(attrs.ngModel, function(newValue, oldValue) {
 					var list = scope.$eval(attrs.jlgTypeahead);
 					var filteredList = filterFilter(scope.$eval(attrs.jlgTypeahead), newValue);
+					scope.noResultFound = (filteredList.length == 0);
+					
 					if (filteredList.length > 8) {
 						popup.addClass('longlist');
 						scope.isLongList = true;
