@@ -29,6 +29,7 @@
 				scope.inputValue = undefined;
 				
 				element.on('focus', function() {
+					$(this).select();
 					if (scope.$eval(attrs.ngModel) == undefined) {
 						// force the watch the first time by updating the ngModel from undefined to ''.
 						scope.$eval(attrs.ngModel + '=""');
@@ -60,20 +61,15 @@
 					scope.isPopupVisible = false;
 				};
 				
-				scope.$$moreResults = function(filter) {
-					console.log('moreResults', filter);
-					scope.isPopupVisible = false;
-					scope.$eval(attrs.moreResults + '("' + filter + '")');
-				};
+				
 				
 				scope.isLongList = false;
 			
 				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
 				popup.append('<div ng-repeat="item in ' + attrs.jlgTypeahead + ' | filter: inputValue track by $index" ng-click="selectItem()" jlg-active>{{item}}</div>');
-				//popup.append('<div ng-show="isLongList" class="moreResults" ng-click="$$moreResults(' + attrs.ngModel + ')">Afficher plus de résultats</div>');
 				popup.append('<div ng-show="noResultFound" class="noResultFound">Aucun résultat trouvé</div>');
 				console.log('popup', popup);
-				element.after(popup);
+				element.parent().after(popup);
 				$compile(popup)(scope);
 				
 				popup.on('mouseenter', function() {
