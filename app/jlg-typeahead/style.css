@@ -3,6 +3,10 @@
 	border: 1px solid black;
 	overflow-y: auto;
 	overflow-x: auto;
+	position: absolute;
+	z-index: 2000;
+	top: 34px;
+	background-color: white;
 }
 
 .jlg-typeahead-popup.longlist {

@@ -28,12 +28,15 @@
 		</div>
 		<div class="jlg-searchbar container-fluid">
 			<form name="searchForm" ng-submit="searchForAliment()" novalidate>
-				<div class="form-group has-feedback">
-					<input id="aliment" type="text" ng-model="nu.aliment" class="form-control"
-						placeholder="Rechercher un aliment"
-						jlg-typeahead="nu.aliments" more-results="moreResults"
-						autocomplete="off"/>
-					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+				<div class="form-group">
+					<div class="input-group">
+						
+						<input id="aliment" type="text" ng-model="nu.aliment" class="form-control" tabindex="1"
+							placeholder="Rechercher un aliment"
+							jlg-typeahead="nu.aliments" more-results="moreResults"
+							autocomplete="off"/>
+						<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+					</div>
 				</div>
 			</form>
 		</div>
