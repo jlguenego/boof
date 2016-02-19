@@ -22,9 +22,6 @@
 			link: function(scope, element, attrs, ctrl) {
 				console.log('link jlgTypeahead', scope, element, attrs, ctrl);
 				
-				ctrl.$setViewValue('essai');
-				ctrl.$commitViewValue();
-				
 				scope.isInputVisible = true;
 				scope.isPopupVisible = false;
 				scope.isMouseInPopup = false;

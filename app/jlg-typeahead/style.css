@@ -1,8 +1,25 @@
+jlg-typeahead {
+	display: block;
+	width: 100%;
+	padding: 0px 0px 0px 0px;
+	font-size: 14px;
+	line-height: 35px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
 jlg-typeahead input {
 	border: none;
-	position: relative;
-	top: -2px;
-	left: -5px;
+	margin: 0px 0px 0px 10px;
+	line-height: 15px;
 }
 
 jlg-typeahead input:focus {
@@ -11,18 +28,14 @@ jlg-typeahead input:focus {
 
 .jlg-typeahead-tag {
 	display: inline-block;
-	height: 30px;
-    line-height: 29px;
+    line-height: 28px;
 	background-color: red;
-	margin: 0px;
+	margin: 0px 2px 0px 2px;
     padding: 0 5px;
 	border: 1px solid #acacac;
     border-radius: 3px;
 	background: linear-gradient(to bottom,#f0f9ff 0,#cbebff 47%,#a1dbff 100%);
-	position: relative;
-	top: -5px;
-	left: -10px;
-	white-space: nowrap;
+	
 }
 
 .jlg-typeahead-tag .remove {

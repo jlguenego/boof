@@ -29,7 +29,7 @@
 		<div class="jlg-searchbar container-fluid">
 			<form name="searchForm" ng-submit="searchForAliment()" novalidate>
 				<div class="form-group has-feedback">
-					<jlg-typeahead class="form-control" ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
+					<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
 						placeholder="Rechercher un aliment" source="nu.aliments"></jlg-typeahead>
 				</div>
 			</form>
