@@ -22,25 +22,49 @@
 			link: function(scope, element, attrs, ctrl) {
 				console.log('link jlgTypeahead', scope, element, attrs, ctrl);
 				
+				ctrl.$setViewValue('essai');
+				ctrl.$commitViewValue();
+				
+				scope.isInputVisible = true;
 				scope.isPopupVisible = false;
 				scope.isMouseInPopup = false;
+				scope.inputValue = undefined;
 				scope.activeItem = undefined;
 				scope.list = undefined;
 				scope.filteredList = undefined;
-				scope.inputValue = undefined;
 				
-				element.on('focus', function() {
+				var tag = angular.element('<div ng-hide="isInputVisible" class="jlg-typeahead-tag">{{' + attrs.ngModel + '}}</div>');
+				var close = angular.element('<span class="remove" ng-click="remove()">x</span>');
+				tag.append(close);
+				element.append(tag);
+				$compile(tag)(scope);
+				
+				var input = angular.element('<input ng-show="isInputVisible" class="jlg-typeahead-input" ng-model="inputValue"/>');
+				input.attr('ng-model-options', attrs.ngModelOptions);
+				input.attr('placeholder', attrs.placeholder);
+				input.attr('autocomplete', 'off');
+				element.append(input);
+				$compile(input)(scope);
+				
+				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
+				popup.append('<div ng-repeat="item in ' + attrs.source + ' | filter: inputValue track by $index" ng-click="selectItem()" jlg-active>{{item}}</div>');
+				popup.append('<div ng-show="noResultFound" class="noResultFound">Aucun résultat trouvé</div>');
+				console.log('popup', popup);
+				element.append(popup);
+				$compile(popup)(scope);
+				
+				input.on('focus', function() {
 					if ($rootScope.cfg.isMobile) {
-						console.log('isMobile');
-						scope.$eval(attrs.ngModel + '=""');
+						console.log('focus isMobile');
+						scope.inputValue = '';
 					} else {
-						console.log('isMobile false');
+						console.log('focus isMobile false');
 						$(this).select();
 					}
 					
-					if (scope.$eval(attrs.ngModel) == undefined) {
+					if (scope.$eval('inputValue') == undefined) {
 						// force the watch the first time by updating the ngModel from undefined to ''.
-						scope.$eval(attrs.ngModel + '=""');
+						scope.$eval('inputValue=""');
 					}
 					if (scope.activeItem == undefined) {
 						// force the watch the first time by updating.
@@ -50,35 +74,13 @@
 					scope.$apply();
 				});
 				
-				element.on('blur', function() {
+				input.on('blur', function() {
 					if (scope.isMouseInPopup) {
 						return;
 					}
 					scope.selectItem();
 					scope.$apply();
 				});
-				
-				scope.togglePopup = function($event) {
-					$event.preventDefault();
-					scope.isPopupVisible = !scope.isPopupVisible;
-				};
-				
-				scope.selectItem = function() {
-					element.val(scope.filteredList[scope.activeItem]);
-					element.trigger('input');
-					scope.isPopupVisible = false;
-				};
-				
-				
-				
-				scope.isLongList = false;
-			
-				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
-				popup.append('<div ng-repeat="item in ' + attrs.jlgTypeahead + ' | filter: inputValue track by $index" ng-click="selectItem()" jlg-active>{{item}}</div>');
-				popup.append('<div ng-show="noResultFound" class="noResultFound">Aucun résultat trouvé</div>');
-				console.log('popup', popup);
-				element.parent().after(popup);
-				$compile(popup)(scope);
 				
 				popup.on('mouseenter', function() {
 					scope.isMouseInPopup = true;
@@ -89,36 +91,46 @@
 					scope.$apply();
 				});
 				
-				scope.$watch('inputValue', function(newValue, oldValue) {
-					console.log('watch inputValue', newValue);
-					scope.list = scope.$eval(attrs.jlgTypeahead);
-					scope.filteredList = filterFilter(scope.list, newValue);
-					scope.noResultFound = (scope.filteredList.length == 0);
-					
-					if (scope.filteredList.length > 8) {
-						popup.addClass('longlist');
-						scope.isLongList = true;
-					} else {
-						popup.removeClass('longlist');
-						scope.isLongList = false;
-					}
-				});
-				
 				scope.$watch('activeItem', function(newValue, oldValue) {
 					console.log('scope.activeItem', scope.activeItem);
 					popup.children().eq(newValue).addClass('active');
 					popup.children().eq(oldValue).removeClass('active');
 				});
 				
-				//validator
-				ctrl.$validators.inArray = function(modelValue, viewValue) {
-					console.log('validator', viewValue);
-					scope.inputValue = viewValue;
-					if (ctrl.$isEmpty(modelValue)) {
-						// consider empty models to be invalid
-						return false;
+				scope.$watch('inputValue', function(newValue, oldValue) {
+					console.log('watch inputValue', newValue);
+					scope.list = scope.$eval(attrs.source);
+					scope.filteredList = filterFilter(scope.list, newValue);
+					scope.noResultFound = (scope.filteredList.length == 0);
+					
+					scope.isLongList = scope.filteredList.length > 8;
+					if (scope.isLongList) {
+						popup.addClass('longlist');
+					} else {
+						popup.removeClass('longlist');
 					}
-					return ($.inArray(viewValue, scope.list) >= 0);
+				});
+				
+				scope.selectItem = function() {
+					console.log('selectItem', scope, ctrl);
+					
+					
+					console.log('about to set ', scope.activeItem);
+					console.log('about to set ', scope.filteredList[scope.activeItem]);
+					ctrl.$setViewValue(scope.filteredList[scope.activeItem]);
+					ctrl.$commitViewValue();
+					scope.isPopupVisible = false;
+					scope.isInputVisible = false;
+					input.val('');
+					input.trigger('input');
+				};
+				
+				scope.remove = function() {
+					console.log('close', scope, ctrl);
+					ctrl.$setViewValue('');
+					ctrl.$commitViewValue();
+					scope.isInputVisible = true;
+					scope.isPopupVisible = false;
 				};
 			}
 		};
@@ -148,4 +160,6 @@
 			}
 		};
 	}]);
+	
+	
 })();

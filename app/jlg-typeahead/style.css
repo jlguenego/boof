@@ -1,3 +1,36 @@
+jlg-typeahead input {
+	border: none;
+	position: relative;
+	top: -2px;
+	left: -5px;
+}
+
+jlg-typeahead input:focus {
+	outline: 0;
+}
+
+.jlg-typeahead-tag {
+	display: inline-block;
+	height: 30px;
+    line-height: 29px;
+	background-color: red;
+	margin: 0px;
+    padding: 0 5px;
+	border: 1px solid #acacac;
+    border-radius: 3px;
+	background: linear-gradient(to bottom,#f0f9ff 0,#cbebff 47%,#a1dbff 100%);
+	position: relative;
+	top: -5px;
+	left: -10px;
+	white-space: nowrap;
+}
+
+.jlg-typeahead-tag .remove {
+	padding: 0px 10px 0px 20px;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
 .jlg-typeahead-popup {
 	width: 300px;
 	border: 1px solid black;
