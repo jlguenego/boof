@@ -30,10 +30,13 @@
 			<form name="searchForm" ng-submit="searchForAliment()" novalidate>
 				<div class="form-group has-feedback">
 					<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
-						placeholder="Rechercher un aliment" source="nu.aliments"></jlg-typeahead>
+						placeholder="Rechercher un aliment" source="nu.aliments" template="popup/search.html"></jlg-typeahead>
 				</div>
+				
 			</form>
+			
 		</div>
+		
 		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
 		<br/>
 		<br/>

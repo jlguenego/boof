@@ -45,22 +45,22 @@ jlg-typeahead input:focus {
 }
 
 .jlg-typeahead-popup {
-	width: 300px;
+	width: 100%;
 	border: 1px solid black;
-	overflow-y: auto;
+	
 	overflow-x: auto;
-	position: absolute;
+	
 	z-index: 2000;
 	background-color: white;
 }
 
 .jlg-typeahead-popup.longlist {
 	border: 1px solid red;
-	height: 400px;
+	
 }
 
 .jlg-typeahead-popup div {
-	font-size: 20px;
+	font-size: 14px;
 	white-space: nowrap;
 }
 

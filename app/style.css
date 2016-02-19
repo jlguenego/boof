@@ -74,25 +74,22 @@ img.jlg-logo {
     border-color: #e7e7e7;
 	border-style: solid;
 	
-	position: fixed;
+	
 	z-index: 400;
 	
     right: 0;
     left: 0;
     
 	min-height: 50px;
-    margin-bottom: 0px;
-	
 	padding-top: 15px;
 }
 
 div.jlg-searchbar.bottom {
-	top: 0px;
 	border-width: 0 0 1px;
 }
 
 div.jlg-searchbar.top {
-	top: 51px;
+	margin-top: 50px;
 	border-width: 0 0 1px;
 }
 
