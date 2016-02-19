@@ -13,6 +13,7 @@
 		var $compile = $injector.get('$compile');
 		var $q = $injector.get('$q');
 		var filterFilter = $injector.get('filterFilter');
+		var $rootScope = $injector.get('$rootScope');
 		
 		return {
 			require: 'ngModel',
@@ -29,7 +30,14 @@
 				scope.inputValue = undefined;
 				
 				element.on('focus', function() {
-					$(this).select();
+					if ($rootScope.cfg.isMobile) {
+						console.log('isMobile');
+						scope.$eval(attrs.ngModel + '=""');
+					} else {
+						console.log('isMobile false');
+						$(this).select();
+					}
+					
 					if (scope.$eval(attrs.ngModel) == undefined) {
 						// force the watch the first time by updating the ngModel from undefined to ''.
 						scope.$eval(attrs.ngModel + '=""');
