@@ -4,17 +4,17 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<title ng-bind="title">Boof !</title>
+		<title ng-bind="title">Layout</title>
 		<link rel="icon" href="favicon.ico" />
 		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
 		<link rel="stylesheet" href="jlg-layout/style.css" />
 	</head>
 
-	<body>
-		<jlg-layout vertical-split >
-			<div pane height="50"></div>
-			<div pane></div>
-		</jlg-layout>
+	<body ng-cloak>
+		<div jlg-layout="{flow : 'row', dividerSize: 0}">
+			<div jlg-layout-container="{fixed=true, height='100px'}">Header</div>    
+			<div jlg-layout-container>Body</div>
+		</div>
 		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="../bower_components/angular/angular.js"></script>
 		<script type="text/javascript" src="layout-app.js"></script>
