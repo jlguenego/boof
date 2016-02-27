@@ -17,11 +17,11 @@
 				console.log('jlgLayout', arguments);
 				console.log('containers', ctrl.containers);
 				var refresh = function() {
-					console.log('onresize');
+					//console.log('onresize');
 					var totalHeight = 0;
 					var parentHeight = element.height();
 					ctrl.containers.forEach(function(container, i) {
-						console.log('container', container, i);
+						//console.log('container', container, i);
 						if (container.cfg.height != undefined) {
 							var height = parseInt(container.cfg.height);
 							totalHeight += height;
@@ -29,7 +29,7 @@
 						}
 					});
 					ctrl.containers.forEach(function(container, i) {
-						console.log('container', container, i);
+						//console.log('container', container, i);
 						if (container.cfg.height == undefined) {
 							var height = (parentHeight - totalHeight) / ctrl.unspecifiedHeightCounter;
 							container.element.css('height', height + 'px');

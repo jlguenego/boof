@@ -9,3 +9,7 @@ html,body {
 	height: 100%;
 	width: 100%;
 }
+
+[jlg-layout-container] {
+	overflow: auto;
+}
