@@ -8,12 +8,13 @@
 		<link rel="icon" href="favicon.ico" />
 		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
 		<link rel="stylesheet" href="jlg-layout/style.css" />
+		<link rel="stylesheet" href="layout.css" />
 	</head>
 
 	<body ng-cloak>
 		<div jlg-layout="{flow : 'row', dividerSize: 0}">
-			<div jlg-layout-container="{fixed=true, height='100px'}">Header</div>    
-			<div jlg-layout-container>Body</div>
+			<div jlg-layout-container="{height:'100px'}" class="header">Header</div>    
+			<div jlg-layout-container class="body">Body</div>
 		</div>
 		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="../bower_components/angular/angular.js"></script>
