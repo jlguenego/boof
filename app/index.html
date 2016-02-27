@@ -14,48 +14,49 @@
 		<link rel="stylesheet" href="jlg-menu/style.css" />
 		<link rel="stylesheet" href="jlg-typeahead/style.css" />
 		<link rel="stylesheet" href="jlg-checkbox/style.css" />
+		<link rel="stylesheet" href="jlg-layout/style.css" />
 	</head>
 
 	<body ng-controller="jlg-menu.Ctrl as menu">
-		<div class="jlg-navbar">
-			<div class="jlg-menu-button"
-				ng-click="menu.toggle()" ng-class="{active: menu.visible }">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</div>
-			<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
-		</div>
-		<div class="jlg-searchbar container-fluid">
-			<form name="searchForm" ng-submit="searchForAliment()" novalidate>
-				<div class="form-group has-feedback">
-					<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
-						placeholder="Rechercher un aliment" source="nu.aliments" template="popup/search.html"></jlg-typeahead>
+		<div jlg-layout="{flow : 'row'}">
+			<div jlg-layout-container="{height:'50px'}">
+				<div class="jlg-navbar">
+					<div class="jlg-menu-button"
+						ng-click="menu.toggle()" ng-class="{active: menu.visible }">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+					<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
 				</div>
-				
-			</form>
-			
+			</div>
+			<div jlg-layout-container="{height:'50px'}">
+				<div class="jlg-searchbar container-fluid">
+					<form name="searchForm" ng-submit="searchForAliment()" novalidate>
+						<div class="form-group has-feedback searchbar-form-group">
+							<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
+								placeholder="Rechercher un aliment" source="nu.aliments" template="popup/search.html"></jlg-typeahead>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div jlg-layout-container class="body">
+				<div class="container-fluid">
+					<h1 class="text-center">{{nu.aliment}}</h1>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8"><jlg-nutritional-table></jlg-nutritional-table></div>
+						<div class="col-md-2"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
+		
+		
 		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<div class="container-fluid">
-			<h1 class="text-center">{{nu.aliment}}</h1>
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8"><jlg-nutritional-table></jlg-nutritional-table></div>
-				<div class="col-md-2"></div>
-			</div>
-			
-		</div>
+
+		
 		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="../bower_components/velocity/velocity.min.js"></script>
 		<script src="../bower_components/papaparse/papaparse.min.js"></script>
@@ -70,5 +71,6 @@
 		<script type="text/javascript" src="jlg-nutritional/jlg-nutritional.js"></script>
 		<script type="text/javascript" src="jlg-typeahead/jlg-typeahead.js"></script>
 		<script type="text/javascript" src="jlg-checkbox/jlg-checkbox.js"></script>
+		<script type="text/javascript" src="jlg-layout/jlg-layout.js"></script>
 	</body>
 </html>

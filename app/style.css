@@ -8,24 +8,15 @@ div.jlg-navbar {
 	background-color: #f8f8f8;
     border-color: #e7e7e7;
 	border-style: solid;
-	
-	position: fixed;
-	z-index: 1030;
-	
-    right: 0;
-    left: 0;
-    
 	min-height: 50px;
     margin-bottom: 0px;
 }
 
 div.jlg-navbar.bottom {
-	bottom: 0;
 	border-width: 1px 0 0;
 }
 
 div.jlg-navbar.top {
-	top: 0px;
 	border-width: 0 0 1px;
 }
 
@@ -73,15 +64,13 @@ img.jlg-logo {
 	background-color: #fdfdfd;
     border-color: #e7e7e7;
 	border-style: solid;
-	
-	
-	z-index: 400;
-	
-    right: 0;
-    left: 0;
     
 	min-height: 50px;
-	padding-top: 15px;
+	padding-top: 5px;
+}
+
+.searchbar-form-group {
+	margin-bottom: 0px;
 }
 
 div.jlg-searchbar.bottom {
@@ -89,23 +78,12 @@ div.jlg-searchbar.bottom {
 }
 
 div.jlg-searchbar.top {
-	margin-top: 50px;
 	border-width: 0 0 1px;
 }
 
-/* uib-typeahead-popup */
-[uib-typeahead-popup]>li>a {
-	font-size: 24px;
-	padding: 6px 20px;
-}
 
-[uib-typeahead-popup]>li>a>strong {
-	font-size: 24px;
-	font-weight: bold;
+/* body */
+.body {
+	background-color: white;
 }
-
-[uib-typeahead-popup] li {
-	
-}
-
 
