@@ -22,10 +22,14 @@
 				$('div.jlg-navbar').addClass('top');
 				$('div.jlg-searchbar').addClass('top');
 				$('jlg-menu').addClass('top');
+				var navbar = $('#jlg-navbar').detach();
+				$('#layout1').prepend(navbar);
 			} else {
 				$('div.jlg-navbar').addClass('bottom');
 				$('div.jlg-searchbar').addClass('bottom');
 				$('jlg-menu').addClass('bottom');
+				var navbar = $('#jlg-navbar').detach();
+				$('#layout1').append(navbar);
 			}
 		});
 		
