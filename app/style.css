@@ -13,9 +13,7 @@ div.jlg-navbar {
 }
 
 div.jlg-navbar.bottom {
-	position: relative;
 	border-width: 1px 0 0;
-	z-index: 3000;
 }
 
 #jlg-navbar {

@@ -16,7 +16,7 @@ jlg-menu {
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
     line-height: 1.42857143;
-	
+	height: 100%;
 }
 
 jlg-menu.top {
@@ -30,13 +30,10 @@ jlg-menu.bottom {
 /* TODO: compute the exact height */
 .jlg-desktop .jlg-menu-frame {
 	width: 400px;
-	height: 1000px;
-	
 }
 
 .jlg-mobile .jlg-menu-frame {
 	width: 100%;
-	height: 1000px;
 }
 
 /* menu panel */

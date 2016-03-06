@@ -54,7 +54,7 @@
 						}
 					});
 				};
-				$window.onresize = refresh;
+				angular.element($window).on('resize', refresh);
 				scope.$watch('cfg', refresh, true);
 				refresh();
 				

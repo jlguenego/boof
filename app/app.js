@@ -37,5 +37,26 @@
 			console.log('$rootScope.moreResults', aliment);
 		}
 	}]);
+	
+	app.directive('jlgMenu', ['$injector', function($injector) {
+		var $templateRequest = $injector.get('$templateRequest');
+		var $compile = $injector.get('$compile');
+		var $window = $injector.get('$window');
+
+		return {
+			restrict: 'EAC',
+			link: function(scope, element, attrs) {
+				var refresh = function() {
+					console.log('compute Height', scope, attrs);
+					var parentHeight = element.parent().height();
+					var height = parentHeight - 50;
+					element.css('height', parentHeight + 'px');
+				}
+				
+				angular.element($window).on('resize', refresh);
+				refresh();
+			}
+		};
+	}]);
 
 })();
