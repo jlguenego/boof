@@ -19,7 +19,7 @@
 
 	<body ng-controller="jlg-menu.Ctrl as menu">
 		<div jlg-layout="{flow : 'row'}" id="layout1">
-			<div jlg-layout-container="{height:'50px'}" id="jlg-navbar">
+			<div jlg-layout-container="{size: 50}" id="jlg-navbar">
 				<div class="jlg-navbar">
 					<div class="jlg-menu-button"
 						ng-click="menu.toggle()" ng-class="{active: menu.visible }">
@@ -30,7 +30,7 @@
 					<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
 				</div>
 			</div>
-			<div jlg-layout-container="{height:'50px'}">
+			<div jlg-layout-container="{size: 50}">
 				<div class="jlg-searchbar container-fluid">
 					<form name="searchForm" ng-submit="searchForAliment()" novalidate>
 						<div class="form-group has-feedback searchbar-form-group">
