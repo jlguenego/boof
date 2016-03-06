@@ -96,3 +96,12 @@ div.jlg-searchbar.top {
 	background-color: white;
 }
 
+/* Menu settings */
+jlg-menu.top {
+	top: 50px;
+}
+
+jlg-menu.bottom {
+	top: 0px;
+}
+

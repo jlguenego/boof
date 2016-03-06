@@ -50,7 +50,7 @@
 					console.log('compute Height', scope, attrs);
 					var parentHeight = element.parent().height();
 					var height = parentHeight - 50;
-					element.css('height', parentHeight + 'px');
+					element.css('height', height + 'px');
 				}
 				
 				angular.element($window).on('resize', refresh);

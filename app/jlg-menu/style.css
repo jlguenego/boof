@@ -19,13 +19,7 @@ jlg-menu {
 	height: 100%;
 }
 
-jlg-menu.top {
-	top: 50px;
-}
 
-jlg-menu.bottom {
-	top: 0px;
-}
 
 /* TODO: compute the exact height */
 .jlg-desktop .jlg-menu-frame {
