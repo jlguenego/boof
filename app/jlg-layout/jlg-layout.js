@@ -12,31 +12,50 @@
 		return {
 			restrict: 'ECA',
 			require: 'jlgLayout',
-			scope: {},
+			scope: {
+				cfg: '=jlgLayout'
+			},
 			link: function(scope, element, attrs, ctrl) {
 				console.log('jlgLayout', arguments);
 				console.log('containers', ctrl.containers);
 				var refresh = function() {
-					//console.log('onresize');
-					var totalHeight = 0;
-					var parentHeight = element.height();
+					console.log('refresh');
+					
+					// remove unwanted whitespace (for avoiding 4px line in col mode)
+					element.contents().filter(function() {
+						return this.nodeType == 3;
+					}).remove();
+					
+					var totalSize = 0;
+					var isRow = scope.cfg.flow == 'row';
+					var parentSize = isRow ? element.height() : element.width();
+					var cssSizeName = isRow ? 'height' : 'width';
+					var cssOrthoSizeName = isRow ? 'width' : 'height';
 					ctrl.containers.forEach(function(container, i) {
 						//console.log('container', container, i);
-						if (container.cfg.height != undefined) {
-							var height = parseInt(container.cfg.height);
-							totalHeight += height;
-							container.element.css('height', container.cfg.height);
+						
+						container.element.css(cssOrthoSizeName, '100%');
+						var display = isRow ? 'block' : 'inline-block';
+						container.element.css('display', display);
+						
+						if (container.cfg.size != undefined) {
+							var size = parseInt(container.cfg.size);
+							totalSize += size;
+							
+							container.element.css(cssSizeName, size + 'px');
+							
 						}
 					});
 					ctrl.containers.forEach(function(container, i) {
 						//console.log('container', container, i);
-						if (container.cfg.height == undefined) {
-							var height = (parentHeight - totalHeight) / ctrl.unspecifiedHeightCounter;
-							container.element.css('height', height + 'px');
+						if (container.cfg.size == undefined) {
+							var size = (parentSize - totalSize) / ctrl.unspecifiedSizeCounter;
+							container.element.css(cssSizeName, size + 'px');
 						}
 					});
 				};
 				$window.onresize = refresh;
+				scope.$watch('cfg', refresh, true);
 				refresh();
 				
 				
@@ -44,7 +63,7 @@
 			controller: ['$scope', '$injector', function ($scope, $injector) {
 				console.log('instanciation of the jlgLayout container. Scope=', $scope);
 				this.containers = [];
-				this.unspecifiedHeightCounter = 0;
+				this.unspecifiedSizeCounter = 0;
 			}]
 		};
 		
@@ -54,16 +73,19 @@
 		return {
 			restrict: 'ECA',
 			require: '^jlgLayout',
+			scope: {
+				cfg: '=jlgLayoutContainer'
+			},
 			link: function(scope, element, attrs, ctrl) {
 				console.log('jlgLayoutContainer', arguments);
 				
 				var cfg = {};
-				if (attrs.jlgLayoutContainer != '') {
-					console.log('attrs.jlgLayoutContainer', attrs.jlgLayoutContainer);
-					cfg = scope.$eval(attrs.jlgLayoutContainer);
+				console.log('scope.cfg', scope.cfg);
+				if (scope.cfg != undefined) {
+					cfg = scope.cfg;
 				}
-				if (cfg.height == undefined) {
-					ctrl.unspecifiedHeightCounter++;
+				if (cfg.size == undefined) {
+					ctrl.unspecifiedSizeCounter++;
 				}
 				var container = {cfg: cfg, element: element};
 				ctrl.containers.push(container);
