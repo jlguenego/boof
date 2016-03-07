@@ -71,11 +71,13 @@ img.jlg-logo {
 /* search bar */
 .jlg-searchbar {
 	background-color: #fdfdfd;
-    border-color: #e7e7e7;
+	border-color: #e7e7e7;
 	border-style: solid;
-    
-	min-height: 50px;
-	padding-top: 5px;
+    width: 100%;
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
 }
 
 div.jlg-searchbar.bottom {

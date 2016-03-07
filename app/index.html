@@ -33,11 +33,9 @@
 					<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
 				</div>
 			</div>
-			<div jlg-layout-container="{size: 50}">
-				<div class="jlg-searchbar">
-					<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
-						placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup" template="popup/search.html"></jlg-typeahead>
-				</div>
+			<div jlg-layout-container="{size: 50}" class="jlg-searchbar">
+				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
+					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup" template="popup/search.html"></jlg-typeahead>
 			</div>
 			<div jlg-layout-container class="body">
 				<div id="popup">
