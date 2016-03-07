@@ -78,20 +78,12 @@ img.jlg-logo {
 	padding-top: 5px;
 }
 
-.searchbar-form-group {
-	margin-bottom: 0px;
-}
-
 div.jlg-searchbar.bottom {
 	border-width: 0 0 1px;
 }
 
 div.jlg-searchbar.top {
 	border-width: 0 0 1px;
-}
-
-#jlg-searchbar {
-	overflow: visible;
 }
 
 
