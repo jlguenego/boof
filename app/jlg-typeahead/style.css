@@ -54,7 +54,7 @@ jlg-typeahead input:focus {
 	width: 100%;
 	border: 1px solid black;
 	
-	overflow-x: auto;
+	overflow-x: hidden;
 	
 	z-index: 2000;
 	background-color: white;
