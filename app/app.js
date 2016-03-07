@@ -8,7 +8,7 @@
 		var $rootScope = $injector.get('$rootScope');
 		
 		
-		$rootScope.title = 'Boof ! Calorie Citron';
+		$rootScope.title = 'Boof !';
 
 		$rootScope.cfg = $rootScope.cfg || {};
 		$rootScope.cfg.isTop = ! $rootScope.cfg.isMobile;

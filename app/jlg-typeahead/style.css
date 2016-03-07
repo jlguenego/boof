@@ -44,6 +44,8 @@ jlg-typeahead input:focus {
 	white-space: nowrap;
 }
 
+/* Popup */
+
 .jlg-typeahead-popup {
 	width: 100%;
 	border: 1px solid black;
