@@ -19,7 +19,10 @@
 		return {
 			require: 'ngModel',
 			restrict: 'EAC',
-			scope: true,
+			scope: {
+				source: '=source',
+				value: '=ngModel'
+			},
 			link: function(scope, element, attrs, ctrl) {
 				console.log('link jlgTypeahead', scope, element, attrs, ctrl);
 				
@@ -28,10 +31,9 @@
 				scope.isMouseInPopup = false;
 				scope.inputValue = undefined;
 				scope.activeItem = undefined;
-				scope.list = undefined;
 				scope.filteredList = undefined;
 				
-				var tag = angular.element('<div ng-hide="isInputVisible" class="jlg-typeahead-tag">{{' + attrs.ngModel + '}}</div>');
+				var tag = angular.element('<div ng-hide="isInputVisible" class="jlg-typeahead-tag">{{value}}</div>');
 				var close = angular.element('<span class="remove" ng-click="remove()">x</span>');
 				tag.append(close);
 				element.append(tag);
@@ -46,7 +48,7 @@
 				
 				var template = (attrs.template) ? attrs.template : 'popup/search.html';
 				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
-				popup.append('<div ng-repeat="$item in ' + attrs.source + ' | filter: inputValue track by $index" ng-click="selectItem()" jlg-active><span ng-include="\'' + template + '\'"></span></div>');
+				popup.append('<div ng-repeat="$item in source | filter: inputValue track by $index" ng-click="selectItem()" jlg-active><span ng-include="\'' + template + '\'"></span></div>');
 				popup.append('<div ng-show="noResultFound" class="noResultFound">Aucun résultat trouvé</div>');
 				console.log('popup', popup);
 				var host = (attrs.popup) ? $(attrs.popup) : element;
@@ -63,9 +65,9 @@
 						$(this).select();
 					}
 					
-					if (scope.$eval('inputValue') == undefined) {
+					if (scope.inputValue == undefined) {
 						// force the watch the first time by updating the ngModel from undefined to ''.
-						scope.$eval('inputValue=""');
+						scope.inputValue = '';
 					}
 					if (scope.activeItem == undefined) {
 						// force the watch the first time by updating.
@@ -100,8 +102,7 @@
 				
 				scope.$watch('inputValue', function(newValue, oldValue) {
 					console.log('watch inputValue', newValue);
-					scope.list = scope.$eval(attrs.source);
-					scope.filteredList = filterFilter(scope.list, newValue);
+					scope.filteredList = filterFilter(scope.source, newValue);
 					scope.noResultFound = (scope.filteredList.length == 0);
 					
 					scope.isLongList = scope.filteredList.length > 8;
