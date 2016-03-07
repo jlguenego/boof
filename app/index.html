@@ -34,13 +34,11 @@
 				</div>
 			</div>
 			<div jlg-layout-container="{size: 50}" id="jlg-searchbar">
-				<div class="jlg-searchbar container-fluid">
-					<form name="searchForm" ng-submit="searchForAliment()" novalidate>
-						<div class="form-group has-feedback searchbar-form-group">
-							<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
-								placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup" template="popup/search.html"></jlg-typeahead>
-						</div>
-					</form>
+				<div class="jlg-searchbar">
+					<div class="form-group has-feedback searchbar-form-group">
+						<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
+							placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup" template="popup/search.html"></jlg-typeahead>
+					</div>
 				</div>
 			</div>
 			<div jlg-layout-container class="body">
@@ -48,7 +46,6 @@
 					
 				</div>
 				<div class="container-fluid" ng-show="nu.aliment != undefined">
-					<h1 class="text-center">{{nu.aliment}}</h1>
 					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-8"><jlg-nutritional-table></jlg-nutritional-table></div>

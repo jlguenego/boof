@@ -34,8 +34,8 @@
 				scope.filteredList = undefined;
 				
 				var tag = angular.element('<div ng-hide="isInputVisible" class="jlg-typeahead-tag">{{value}}</div>');
-				var close = angular.element('<span class="remove" ng-click="remove()">x</span>');
-				tag.append(close);
+				var close = angular.element('<span class="remove" ng-click="remove()">&lt;</span>');
+				tag.prepend(close);
 				element.append(tag);
 				$compile(tag)(scope);
 				
@@ -125,6 +125,7 @@
 					scope.isInputVisible = false;
 					input.val('');
 					input.trigger('input');
+					element.addClass('tag-visible');
 				};
 				
 				scope.remove = function() {
@@ -133,6 +134,7 @@
 					ctrl.$commitViewValue();
 					scope.isInputVisible = true;
 					scope.isPopupVisible = false;
+					element.removeClass('tag-visible');
 				};
 			}
 		};
