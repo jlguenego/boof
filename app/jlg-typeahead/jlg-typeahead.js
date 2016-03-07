@@ -81,7 +81,7 @@
 					if (scope.isMouseInPopup) {
 						return;
 					}
-					scope.selectItem();
+					//scope.selectItem();
 					scope.$apply();
 				});
 				
@@ -91,6 +91,12 @@
 				});
 				popup.on('mouseleave', function() {
 					scope.isMouseInPopup = false;
+					scope.$apply();
+				});
+				
+				popup.on('touchstart', function() {
+					$rootScope.debug = 'touchstart';
+					input.blur();
 					scope.$apply();
 				});
 				
@@ -126,6 +132,11 @@
 					input.val('');
 					input.trigger('input');
 					element.addClass('tag-visible');
+					if (attrs.onSelectItem) {
+						scope.$parent.$eval(attrs.onSelectItem);
+					}
+					
+					
 				};
 				
 				scope.remove = function() {

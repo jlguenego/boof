@@ -9,6 +9,7 @@
 		
 		
 		$rootScope.title = 'Boof !';
+		$rootScope.debug = 'none';
 
 		$rootScope.cfg = $rootScope.cfg || {};
 		$rootScope.cfg.isTop = ! $rootScope.cfg.isMobile;
@@ -35,7 +36,13 @@
 		
 		$rootScope.moreResults = function(aliment) {
 			console.log('$rootScope.moreResults', aliment);
-		}
+		};
+		
+		$rootScope.bodyScrollTop = function() {
+			console.log('bodyScrollTop');
+			$('#body').scrollTop(0);
+		};
+		
 	}]);
 	
 	app.directive('jlgMenu', ['$injector', function($injector) {

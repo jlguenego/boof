@@ -37,10 +37,11 @@
 				</div>
 			</div>
 			<div jlg-layout-container="{size: 50}" class="jlg-searchbar">
-				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }" jlg-tabindex="1"
-					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup" template="popup/search.html"></jlg-typeahead>
+				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
+					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup"
+					template="popup/search.html" on-select-item="bodyScrollTop()"></jlg-typeahead>
 			</div>
-			<div jlg-layout-container class="body">
+			<div jlg-layout-container class="body" id="body">
 				<div id="popup">
 					
 				</div>
