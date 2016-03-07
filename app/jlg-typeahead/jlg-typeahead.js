@@ -33,8 +33,8 @@
 				scope.activeItem = undefined;
 				scope.filteredList = undefined;
 				
-				var tag = angular.element('<div ng-hide="isInputVisible" class="jlg-typeahead-tag">{{value}}</div>');
-				var close = angular.element('<span class="remove" ng-click="remove()">&lt;</span>');
+				var tag = angular.element('<div ng-hide="isInputVisible" class="jlg-typeahead-tag"></div>');
+				var close = angular.element('<span class="remove" ng-click="remove()">&lt; Voir d\'autres aliments</span>');
 				tag.prepend(close);
 				element.append(tag);
 				$compile(tag)(scope);

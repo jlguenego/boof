@@ -39,6 +39,7 @@ jlg-typeahead input:focus {
     padding: 10px 5px 15px 5px;
 	text-align: center;
 	background-color: #ccc;
+	height: 50px;
 }
 
 .jlg-typeahead-tag .remove {
