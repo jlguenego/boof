@@ -90,6 +90,10 @@ div.jlg-searchbar.top {
 	border-width: 0 0 1px;
 }
 
+#jlg-searchbar {
+	overflow: visible;
+}
+
 
 /* body */
 .body {

@@ -138,24 +138,17 @@
 	}]);
 	
 	app.directive('jlgActive', ['$injector', function($injector) {
-		var $compile = $injector.get('$compile');
-		var $q = $injector.get('$q');
-		
 		return {
 			restrict: 'A',
 			link: function(scope, element, attrs) {
-				
-				
-				element.bind('mouseenter', function(e) {
+				var selectFn = function() {
 					scope.$parent.activeItem = scope.$index;
 					scope.$apply();
-				});
+				}
 				
+				element.bind('mouseenter', selectFn);
 				// for tactile interface
-				element.bind('touchstart', function(e) {
-					scope.$parent.activeItem = scope.$index;
-					scope.$apply();
-				});
+				element.bind('touchstart', selectFn);
 				
 				
 			}
