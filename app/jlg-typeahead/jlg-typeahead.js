@@ -78,9 +78,18 @@
 				});
 				
 				input.on('blur', function() {
+					console.log('input blur', scope.isMouseInPopup);
 					if (scope.isMouseInPopup) {
 						return;
 					}
+					// scope.doNotRemovePopup = true for managing the use case
+					// where it is a popup touchstart from a mobile.
+					if (scope.doNotRemovePopup) {
+						delete scope.doNotRemovePopup;
+					} else {
+						scope.isPopupVisible = false;
+					}
+					
 					//scope.selectItem();
 					scope.$apply();
 				});
@@ -96,18 +105,17 @@
 				
 				popup.on('touchstart', function() {
 					$rootScope.debug = 'touchstart';
+					scope.doNotRemovePopup = true;
 					input.blur();
 					scope.$apply();
 				});
 				
 				scope.$watch('activeItem', function(newValue, oldValue) {
-					console.log('scope.activeItem', scope.activeItem);
 					popup.children().eq(newValue).addClass('active');
 					popup.children().eq(oldValue).removeClass('active');
 				});
 				
 				scope.$watch('inputValue', function(newValue, oldValue) {
-					console.log('watch inputValue', newValue);
 					scope.filteredList = filterFilter(scope.source, newValue);
 					scope.noResultFound = (scope.filteredList.length == 0);
 					
