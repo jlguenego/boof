@@ -5,8 +5,6 @@
 	
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
-		console.log('jlg-menu: run');
-
 	}]);
 	
 	app.controller('jlg-menu.Ctrl', ['$injector', '$scope', function($injector, $scope) {
@@ -38,11 +36,9 @@
 		};
 		
 		var panels = [];
-		var width = 400;
 		
 		
 		this.initMenu = function() {
-			console.log('jlg-menu ctrl.initMenu');
 			frame.attr('ng-click', this.name + '.toggle()');
 			this.element.append(frame);
 			$compile(frame)($scope);
@@ -50,12 +46,10 @@
 		
 		this.visible = false;
 		this.toggle = function(name) {
-			console.log('toggle');
 			this.visible = !this.visible;
 			if (!this.visible) {
 				return;
 			}
-			console.log(this.initialPage);
 			this.reset();
 		};
 		
@@ -81,11 +75,10 @@
 				$compile(panel)($scope);
 				if (panels.length > 1) {
 					var previousPanel = frame.children().eq(panels.length - 2);
-					animateAsync(previousPanel, 0, -width);
+					animateAsync(previousPanel, 0, -previousPanel.width());
 				}
-				return animateAsync(panel, width, 0);
+				return animateAsync(panel, panel.width(), 0);
 			}).then(function() {
-				console.log('animation finished.');
 			}).catch(function(error) {
 				console.error('error', error);
 			});
@@ -106,11 +99,10 @@
 		};
 		
 		this.back = function() {
-			console.log('back');
 			var panel = frame.children().eq(panels.length - 1);
 			var previousPanel = frame.children().eq(panels.length - 2);
-			animateAsync(panel, 0, width);
-			return animateAsync(previousPanel, -width, 0).then(function() {
+			animateAsync(panel, 0, panel.width());
+			return animateAsync(previousPanel, -previousPanel.width(), 0).then(function() {
 				frame.children().eq(panels.length - 1).remove();
 				panels.pop();
 			});
@@ -127,7 +119,6 @@
 		return {
 			restrict: 'EAC',
 			link: function(scope, element, attrs) {
-				console.log('link jlgMenuLayer', scope, attrs);
 				var ctrl = scope[attrs.ctrl];
 				ctrl.element = element;
 				ctrl.initialPage = attrs.init;
@@ -145,7 +136,6 @@
 		return {
 			restrict: 'EAC',
 			link: function(scope, element, attrs) {
-				console.log('link jlgMenuTitle', scope, attrs);
 				scope.titleDiv.html(attrs['jlgMenuTitle']);
 			}
 		};

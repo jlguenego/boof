@@ -3,6 +3,14 @@ jlg-menu {
 	position: fixed;
 	z-index: 500;
 	background-color: transparent;
+}
+
+.jlg-desktop jlg-menu {
+	width: 400px;
+	right: 0px;
+}
+
+.jlg-mobile jlg-menu {
 	width: 100%;
 }
 
