@@ -103,22 +103,4 @@ jlg-menu.bottom {
 	top: 0px;
 }
 
-/* search popup */
-.jlg-typeahead-popup {
-	border: none;
-}
-
-.jlg-typeahead-popup.longlist {
-	border: none;
-}
-
-.jlg-typeahead-popup div {
-	line-height: 40px;
-}
-
-.jlg-typeahead-popup div.moreResults {
-}
-
-.jlg-typeahead-popup .active {
-}
 

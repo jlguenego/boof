@@ -15,6 +15,7 @@ html,body {
 [jlg-layout-container] {
 	overflow: auto;
 	font-size: 16px;
+	white-space: normal;
 }
 
 .jlg-mobile [jlg-layout-container] {

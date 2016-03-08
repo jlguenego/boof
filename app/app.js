@@ -46,10 +46,7 @@
 	}]);
 	
 	app.directive('jlgMenu', ['$injector', function($injector) {
-		var $templateRequest = $injector.get('$templateRequest');
-		var $compile = $injector.get('$compile');
 		var $window = $injector.get('$window');
-
 		return {
 			restrict: 'EAC',
 			link: function(scope, element, attrs) {
@@ -66,4 +63,21 @@
 		};
 	}]);
 
+	app.directive('jlgAutosize', ['$injector', function($injector) {
+
+		return {
+			restrict: 'EAC',
+			link: function(scope, element, attrs) {
+				scope.$watch('item', function() {
+					var nbr = element.text().length;
+					var size = 16;
+					if (nbr > 40) {
+						size = 13;
+					}
+					element.css('font-size', size + 'px');
+				});
+				
+			}
+		};
+	}]);
 })();
