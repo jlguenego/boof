@@ -52,7 +52,6 @@ jlg-typeahead input:focus {
 
 .jlg-typeahead-popup {
 	width: 100%;
-	border: 1px solid black;
 	
 	overflow-x: hidden;
 	
@@ -75,8 +74,6 @@ jlg-typeahead input:focus {
 }
 
 .jlg-typeahead-popup.longlist {
-	border: 1px solid red;
-	
 }
 
 .jlg-typeahead-popup div.moreResults {

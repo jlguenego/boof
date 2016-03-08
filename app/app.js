@@ -64,16 +64,20 @@
 	}]);
 
 	app.directive('jlgAutosize', ['$injector', function($injector) {
-
+		var $rootScope = $injector.get('$rootScope');
 		return {
 			restrict: 'EAC',
 			link: function(scope, element, attrs) {
+				
 				scope.$watch('item', function() {
 					var nbr = element.text().length;
 					var size = 16;
-					if (nbr > 40) {
-						size = 13;
+					if ($rootScope.cfg.isMobile) {
+						if (nbr > 40) {
+							size = 13;
+						}
 					}
+					
 					element.css('font-size', size + 'px');
 				});
 				
