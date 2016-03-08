@@ -60,6 +60,12 @@ jlg-typeahead input:focus {
 	background-color: white;
 }
 
+.jlg-typeahead-popup > div {
+	border-color: #e7e7e7;
+	border-style: solid;
+	border-width: 0 0 1px;
+}
+
 .jlg-typeahead-popup.longlist {
 	border: 1px solid red;
 	
