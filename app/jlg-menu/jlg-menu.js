@@ -66,7 +66,7 @@
 			title = title || 'Warning: no title!';
 			panels.push({templateUrl: templateUrl, title: title});
 			
-			$templateRequest(templateUrl + '?' + new Date().getTime()).then(function(response) {
+			$templateRequest(templateUrl).then(function(response) {
 				var panel = angular.element('<div class="jlg-menu-panel" ng-click="$event.stopPropagation()"></div>');
 				panel.append(self.makeTitle(title));
 				panel.append(response);

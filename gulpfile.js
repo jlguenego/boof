@@ -9,12 +9,13 @@ var inject = require('gulp-inject');
 var ghPages = require('gulp-gh-pages');
 
 
-gulp.task('default', ['html', 'data', 'images']);
+gulp.task('default', ['html', 'data', 'images', 'fonts']);
 
 var dist = 'dist';
 var html = ['app/index.html'];
 var template = ['app/popup/**/*.html', 'app/menu/**/*.html'];
 var images = ['app/**/*.ico', 'app/**/*.png'];
+var fonts = ['bower_components/bootstrap/dist/fonts/*'];
 var data = ['app/**/*.json', 'app/**/*.csv'];
 
 // Delete the dist directory
@@ -32,6 +33,11 @@ gulp.task('template', ['clean'], function() {
 
 gulp.task('images', ['clean'], function() {
 	return gulp.src(images)
+		.pipe(gulp.dest(dist));
+});
+
+gulp.task('fonts', ['clean'], function() {
+	return gulp.src(fonts, { base: 'bower_components/bootstrap/dist' })
 		.pipe(gulp.dest(dist));
 });
 
