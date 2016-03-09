@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		
+		<link rel="apple-touch-icon" href="favicon.png">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		
+		<title ng-bind="title">Boof !</title>
+		<link rel="icon" href="favicon.ico?x" />
+		
+		<link rel="stylesheet" href="boof.min.css">
+	</head>
+
+	<body ng-controller="jlg-menu.Ctrl as menu" ng-cloak>
+		<div jlg-layout="{flow : 'row'}" id="layout1">
+			<div jlg-layout-container="{size: 50}" id="jlg-navbar">
+				<div class="jlg-navbar">
+					<div class="jlg-menu-button"
+						ng-click="menu.toggle()" ng-class="{active: menu.visible }">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+					<a href="#" class="pull-left"><img class="jlg-logo" src="logo.png"></a>
+				</div>
+			</div>
+			<div jlg-layout-container="{size: 50}" class="jlg-searchbar">
+				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
+					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup"
+					template="popup/search.html" on-select-item="bodyScrollTop()"></jlg-typeahead>
+			</div>
+			<div jlg-layout-container class="body" id="body">
+				<div id="popup">
+					
+				</div>
+				<div class="container-fluid" ng-show="nu.aliment != undefined">
+					<h1 class="text-center">{{nu.aliment}}</h1>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8"><jlg-nutritional-table></jlg-nutritional-table></div>
+						<div class="col-md-2"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
+
+		<script src="boof.min.js"></script>
+		<!-- inject:js -->
+		<script src="templates.js"></script>
+		<!-- endinject -->
+	</body>
+</html>
