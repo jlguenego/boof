@@ -5,3 +5,4 @@ build/
 *.bak
 config.js
 dist/**/*
+tmp/**/*
