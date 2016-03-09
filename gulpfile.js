@@ -58,7 +58,7 @@ gulp.task('html', ['clean', 'template'], function() {
 
 gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
-    .pipe(ghPages());
+    .pipe(ghPages({ cacheDir: '../.publish_boof'}));
 });
 
 

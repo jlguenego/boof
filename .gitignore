@@ -6,4 +6,3 @@ build/
 config.js
 dist/**/*
 tmp/**/*
-.publish/
