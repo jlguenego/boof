@@ -8,11 +8,13 @@ var templateCache = require('gulp-angular-templatecache');
 var inject = require('gulp-inject');
 
 
-gulp.task('default', ['html']);
+gulp.task('default', ['html', 'data', 'images']);
 
 var dist = 'dist';
 var html = ['app/index.html'];
 var template = ['app/popup/**/*.html', 'app/menu/**/*.html'];
+var images = ['app/**/*.ico', 'app/**/*.png'];
+var data = ['app/**/*.json', 'app/**/*.csv'];
 
 // Delete the dist directory
 gulp.task('clean', function() {
@@ -20,8 +22,20 @@ gulp.task('clean', function() {
 });
 
 gulp.task('template', ['clean'], function() {
-	return gulp.src(template)
-		.pipe(templateCache())
+	return gulp.src(template, {base: 'app'})
+		.pipe(templateCache({ base: function(file) {		
+			return file.relative;
+		}}))
+		.pipe(gulp.dest(dist));
+});
+
+gulp.task('images', ['clean'], function() {
+	return gulp.src(images)
+		.pipe(gulp.dest(dist));
+});
+
+gulp.task('data', ['clean'], function() {
+	return gulp.src(data)
 		.pipe(gulp.dest(dist));
 });
 
