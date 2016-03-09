@@ -6,6 +6,7 @@ var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var templateCache = require('gulp-angular-templatecache');
 var inject = require('gulp-inject');
+var ghPages = require('gulp-gh-pages');
 
 
 gulp.task('default', ['html', 'data', 'images']);
@@ -48,6 +49,12 @@ gulp.task('html', ['clean', 'template'], function() {
 		.pipe(gulpif('*.css', minifyCss()))
 		.pipe(gulp.dest(dist));
 });
+
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
+});
+
 
 
 
