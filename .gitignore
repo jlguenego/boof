@@ -4,3 +4,4 @@ build/
 *.log
 *.bak
 config.js
+dist/**/*

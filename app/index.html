@@ -10,6 +10,8 @@
 		
 		<title ng-bind="title">Boof !</title>
 		<link rel="icon" href="favicon.ico?x" />
+		
+		<!-- build:css boof.min.css -->
 		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
 		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
@@ -21,6 +23,7 @@
 		<link rel="stylesheet" href="jlg-layout/style.css" />
 		
 		<link rel="stylesheet" href="style.css" />
+		<!-- endbuild -->
 	</head>
 
 	<body ng-controller="jlg-menu.Ctrl as menu" ng-cloak>
@@ -60,7 +63,7 @@
 		
 		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
 
-		
+		<!-- build:js boof.min.js -->
 		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="../bower_components/velocity/velocity.min.js"></script>
 		<script src="../bower_components/papaparse/papaparse.min.js"></script>
@@ -76,5 +79,6 @@
 		<script type="text/javascript" src="jlg-typeahead/jlg-typeahead.js"></script>
 		<script type="text/javascript" src="jlg-checkbox/jlg-checkbox.js"></script>
 		<script type="text/javascript" src="jlg-layout/jlg-layout.js"></script>
+		<!-- endbuild -->
 	</body>
 </html>
