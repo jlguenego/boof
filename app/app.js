@@ -13,6 +13,7 @@
 				url: "/",
 				templateUrl: "route/home.html",
 				controller: ['$rootScope', function($rootScope) {
+					console.log('instantiate home ctrl');
 					$rootScope.nu.aliment = undefined;
 				}]
 			})
@@ -59,7 +60,7 @@
 		
 		$rootScope.viewAliment = function() {
 			console.log('viewAliment');
-			$state.go('aliment', { alimentName: 'kiki'});
+			$state.go('aliment', { alimentName: encodeURI($rootScope.nu.aliment)});
 			$('#body').scrollTop(0);
 		};
 		
