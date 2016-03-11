@@ -12,29 +12,9 @@
 		$rootScope.nu.aliment = undefined;
 		$rootScope.nu.aliments = [];
 		
-		$rootScope.searchForAliment = function() {
-			console.log('searchForAliment', $rootScope.nu.aliment);
-		};
-		
 		$http.get('jlg-nutritional/data.csv').then(function(response) {
 			$rootScope.data = Papa.parse(response.data, {
-				delimiter: "",	// auto-detect
-				newline: "",	// auto-detect
 				header: true,
-				dynamicTyping: false,
-				preview: 0,
-				encoding: "",
-				worker: false,
-				comments: false,
-				step: undefined,
-				complete: undefined,
-				error: undefined,
-				download: false,
-				skipEmptyLines: false,
-				chunk: undefined,
-				fastMode: undefined,
-				beforeFirstChunk: undefined,
-				withCredentials: undefined
 			});
 			$rootScope.data.data = $rootScope.data.data.filter(function(n) { return n.ORIGFDNM != undefined });
 			
