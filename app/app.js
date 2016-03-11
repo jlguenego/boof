@@ -1,13 +1,27 @@
 (function() {
 	'use strict';
 
-	var app = angular.module('mainApp', ['ui.bootstrap',
+	var app = angular.module('mainApp', ['ui.bootstrap', 'ui.router',
 		'jsonFormatter', 'jlg-menu', 'jlg-nutritional', 'jlg-typeahead', 'jlg-checkbox', 'jlg-layout', 'templates']);
 	
 	angular.module('templates', []);
 	
+	app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+		$urlRouterProvider.otherwise('/');
+		$stateProvider
+			.state('home', {
+				url: "/",
+				templateUrl: "route/home.html"
+			})
+			.state('aliment', {
+				url: "/aliment/:alimentName",
+				templateUrl: "route/aliment.html"
+			});
+	}]);
+	
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
+		var $state = $injector.get('$state');
 		
 		
 		$rootScope.title = 'Boof !';
@@ -40,10 +54,12 @@
 			console.log('$rootScope.moreResults', aliment);
 		};
 		
-		$rootScope.bodyScrollTop = function() {
-			console.log('bodyScrollTop');
+		$rootScope.viewAliment = function() {
+			console.log('viewAliment');
+			$state.go('aliment', { alimentName: 'kiki'});
 			$('#body').scrollTop(0);
 		};
+		
 		
 	}]);
 	

@@ -42,20 +42,12 @@
 			<div jlg-layout-container="{size: 50}" class="jlg-searchbar">
 				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
 					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup"
-					template="popup/search.html" on-select-item="bodyScrollTop()"></jlg-typeahead>
+					template="popup/search.html" on-select-item="viewAliment()"></jlg-typeahead>
 			</div>
 			<div jlg-layout-container class="body" id="body">
-				<div id="popup">
-					
-				</div>
-				<div class="container-fluid" ng-show="nu.aliment != undefined">
-					<h1 class="text-center">{{nu.aliment}}</h1>
-					<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8"><jlg-nutritional-table></jlg-nutritional-table></div>
-						<div class="col-md-2"></div>
-					</div>
-				</div>
+				<div id="popup"></div>
+				<div ui-view></div>
+				
 			</div>
 		</div>
 		
@@ -64,14 +56,15 @@
 		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
 
 		<!-- build:js boof.min.js -->
-		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="../bower_components/velocity/velocity.min.js"></script>
-		<script src="../bower_components/papaparse/papaparse.min.js"></script>
+		<script src="../bower_components/jquery/dist/jquery.js"></script>
+		<script src="../bower_components/velocity/velocity.js"></script>
+		<script src="../bower_components/papaparse/papaparse.js"></script>
 		<script src="../bower_components/angular/angular.js"></script>
 		<script src="../bower_components/angular-animate/angular-animate.js"></script>
-		<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-		<script src="../bower_components/json-formatter/dist/json-formatter.min.js"></script>
+		<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script src="../bower_components/json-formatter/dist/json-formatter.js"></script>
 		<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+		<script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="jlg-menu/jlg-menu.js"></script>
 		<script type="text/javascript" src="jlg-responsive/jlg-responsive.js"></script>

@@ -88,6 +88,10 @@ div.jlg-searchbar.top {
 	border-width: 0 0 1px;
 }
 
+#popup {
+	z-index: 100;
+}
+
 
 /* body */
 .body {

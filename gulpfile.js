@@ -13,7 +13,7 @@ gulp.task('default', ['html', 'data', 'images', 'fonts']);
 
 var dist = 'dist';
 var html = ['app/index.html'];
-var template = ['app/popup/**/*.html', 'app/menu/**/*.html'];
+var template = ['app/popup/**/*.html', 'app/menu/**/*.html', 'app/route/**/*.html'];
 var images = ['app/**/*.ico', 'app/**/*.png'];
 var fonts = ['bower_components/bootstrap/dist/fonts/*'];
 var data = ['app/**/*.json', 'app/**/*.csv'];
