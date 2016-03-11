@@ -18,8 +18,24 @@
 				}]
 			})
 			.state('aliment', {
-				url: "/aliment/:alimentName",
-				templateUrl: "route/aliment.html"
+				url: "/aliment/:alimentURI",
+				templateUrl: "route/aliment.html",
+				controller: ['$injector', function($injector) {
+					var $rootScope = $injector.get('$rootScope');
+					var $stateParams = $injector.get('$stateParams');
+					var $state = $injector.get('$state');
+					console.log('instantiate aliment ctrl', $stateParams);
+					console.log('$stateParams.alimentURI', $stateParams.alimentURI);
+					if ($stateParams.alimentURI == '') {
+						console.log('exit from aliment ctrl');
+						return;
+					}
+					$rootScope.nu.aliment = $rootScope.nu.getAlimentFromURI($stateParams.alimentURI);
+					if ($rootScope.nu.aliment == undefined) {
+						$state.go('home', {});
+					}
+					console.log('$rootScope.nu.aliment', $rootScope.nu.aliment);
+				}]
 			});
 	}]);
 	
@@ -58,16 +74,17 @@
 			console.log('$rootScope.moreResults', aliment);
 		};
 		
-		var niceUri = function(uri) {
-			var result = removeDiacritics(uri).replace(/[^a-zA-Z0-9]+/g, '-');
-			return encodeURI(result);
+		$rootScope.home = function(aliment) {
+			$('#body').scrollTop(0);
+			$state.go('home', {});
 		};
 		
 		$rootScope.$watch('nu.aliment', function(newValue) {
 			console.log('watch nu.aliment', newValue);
 			$('#body').scrollTop(0);
 			if (newValue != undefined) {
-				$state.go('aliment', { alimentName: niceUri($rootScope.nu.aliment)});
+				var uri = $rootScope.nu.getURIFromAliment($rootScope.nu.aliment);
+				$state.go('aliment', { alimentURI: uri});
 			} else {
 				$state.go('home', {});
 			}

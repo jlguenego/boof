@@ -40,9 +40,12 @@
 				</div>
 			</div>
 			<div jlg-layout-container="{size: 50}" class="jlg-searchbar">
-				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
+				<jlg-typeahead ng-hide="nu.aliment" ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
 					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup"
 					template="jlg-typeahead/tmpl/popup-item.html"></jlg-typeahead>
+				<div class="jlg-searchbar-result">
+					<span ng-click="home()" ng-show="nu.aliment">&lt; Voir d'autres aliments</span>
+				</div>
 			</div>
 			<div jlg-layout-container class="body" id="body">
 				<div id="popup"></div>
@@ -72,7 +75,7 @@
 		<script type="text/javascript" src="jlg-typeahead/jlg-typeahead.js"></script>
 		<script type="text/javascript" src="jlg-checkbox/jlg-checkbox.js"></script>
 		<script type="text/javascript" src="jlg-layout/jlg-layout.js"></script>
-		<script type="text/javascript" src="jlg-diacritics/jlg-diacritics.js"></script>
+		<script type="text/javascript" src="jlg-misc/jlg-misc.js"></script>
 		<!-- endbuild -->
 		<!-- inject:js -->
 		<!-- endinject -->

@@ -1,27 +1,48 @@
 (function() {
 	'use strict';
 
-	var app = angular.module('jlg-nutritional', []);
+	var app = angular.module('jlg-nutritional', ['jlg-misc']);
 	
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
 		var $http = $injector.get('$http');
+		var misc = $injector.get('misc');
 		
 		console.log('jlg-nutritional: run');
 		$rootScope.nu = {};
 		$rootScope.nu.aliment = undefined;
 		$rootScope.nu.aliments = [];
+		$rootScope.nu.alimentURIMap = {};
+		
+		$rootScope.nu.getURIFromAliment = function(alimentName) {
+			console.log('getURIFromAliment with ', alimentName);
+			var result = misc.niceURI(alimentName);
+			console.log('returning ', result);
+			return result;
+		};
+		
+		$rootScope.nu.getAlimentFromURI = function(uri) {
+			return $rootScope.nu.alimentURIMap[uri];
+		};
 		
 		$http.get('jlg-nutritional/data.csv').then(function(response) {
-			$rootScope.data = Papa.parse(response.data, {
+			$rootScope.csv = Papa.parse(response.data, {
 				header: true,
 			});
-			$rootScope.data.data = $rootScope.data.data.filter(function(n) { return n.ORIGFDNM != undefined });
+			$rootScope.csv.data = $rootScope.csv.data.filter(function(n) { return n.ORIGFDNM != undefined });
 			
-			$rootScope.nu.aliments = $rootScope.data.data.map(function(n) { return n.ORIGFDNM; }).sort();
+			$rootScope.nu.aliments = $rootScope.csv.data.map(function(n) { return n.ORIGFDNM; }).sort();
+			
+			$rootScope.nu.aliments.forEach(function(alimentName) {
+				var uri = misc.niceURI(alimentName);
+				if ($rootScope.nu.alimentURIMap[uri]) {
+					console.warn('collision in alimentURIMap: ', alimentName, $rootScope.nu.alimentURIMap[uri]);
+				}
+				$rootScope.nu.alimentURIMap[uri] = alimentName;
+			});
 
 			$rootScope.$watch('nu.aliment', function() {
-				$rootScope.nu.alimentData = $rootScope.data.data.find(function(n) { return n.ORIGFDNM === $rootScope.nu.aliment; });
+				$rootScope.nu.alimentData = $rootScope.csv.data.find(function(n) { return n.ORIGFDNM === $rootScope.nu.aliment; });
 				console.log('$rootScope.nu.aliment', $rootScope.nu.aliment);
 				console.log('$rootScope.nu.alimentData', $rootScope.nu.alimentData);
 				$rootScope.nu.alimentDataTable = object2array($rootScope.nu.alimentData);

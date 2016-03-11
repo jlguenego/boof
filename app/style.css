@@ -92,6 +92,16 @@ div.jlg-searchbar.top {
 	z-index: 100;
 }
 
+.jlg-searchbar-result {
+	background-color: #ccc;
+	height: 50px;
+}
+
+.jlg-searchbar-result > span {
+	line-height: 50px;
+	padding: 20px 30px;
+	cursor: pointer;
+}
 
 /* body */
 .body {

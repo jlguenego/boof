@@ -102,5 +102,16 @@
         });
     }
 
-	window.removeDiacritics = removeDiacritics;
+	var niceURI = function(uri) {
+		var result = removeDiacritics(uri).replace(/[^a-zA-Z0-9]+/g, '-');
+		return encodeURI(result);
+	};
+	
+	var app = angular.module('jlg-misc', []);
+	
+	app.value('misc', {
+		niceURI: niceURI,
+		removeDiacritics: removeDiacritics
+	});
+	
 })();

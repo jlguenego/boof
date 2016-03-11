@@ -8,10 +8,6 @@ jlg-typeahead {
 	border: none;
 }
 
-jlg-typeahead.tag-visible {
-	padding: 0px;
-}
-
 jlg-typeahead input {
 	background-color: #fff;
 	background-image: none;
@@ -28,24 +24,26 @@ jlg-typeahead input:focus {
 }
 
 .jlg-typeahead-tag {
-	display: block;
-	width: 100%;
-    line-height: 28px;
-	font-weight: bold;
-	font-size: 30px;
-	background-color: transparent;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	line-height: 35px;
 	margin: 0px;
-    padding: 10px 5px 15px 5px;
-	text-align: center;
+	padding: 0px 20px;
+	width: 100%;
+}
+
+.jlg-typeahead-tag > span {
+	padding: 6px;
+	margin: 0px;
 	background-color: #ccc;
-	height: 50px;
 }
 
 .jlg-typeahead-tag .remove {
 	padding: 0px 10px 0px 20px;
 	cursor: pointer;
 	white-space: nowrap;
-	float: left;
 }
 
 /* Popup */
