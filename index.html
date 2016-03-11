@@ -30,20 +30,12 @@
 			<div jlg-layout-container="{size: 50}" class="jlg-searchbar">
 				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
 					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup"
-					template="popup/search.html" on-select-item="bodyScrollTop()"></jlg-typeahead>
+					template="popup/search.html"></jlg-typeahead>
 			</div>
 			<div jlg-layout-container class="body" id="body">
-				<div id="popup">
-					
-				</div>
-				<div class="container-fluid" ng-show="nu.aliment != undefined">
-					<h1 class="text-center">{{nu.aliment}}</h1>
-					<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8"><jlg-nutritional-table></jlg-nutritional-table></div>
-						<div class="col-md-2"></div>
-					</div>
-				</div>
+				<div id="popup"></div>
+				<div ui-view></div>
+				
 			</div>
 		</div>
 		
