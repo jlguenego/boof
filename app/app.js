@@ -58,9 +58,14 @@
 			console.log('$rootScope.moreResults', aliment);
 		};
 		
+		var niceUri = function(uri) {
+			var result = removeDiacritics(uri).replace(/[^a-zA-Z0-9]+/g, '-');
+			return encodeURI(result);
+		};
+		
 		$rootScope.viewAliment = function() {
 			console.log('viewAliment');
-			$state.go('aliment', { alimentName: encodeURI($rootScope.nu.aliment)});
+			$state.go('aliment', { alimentName: niceUri($rootScope.nu.aliment)});
 			$('#body').scrollTop(0);
 		};
 		
