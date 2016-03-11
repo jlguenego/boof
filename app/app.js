@@ -65,6 +65,7 @@
 		
 		$rootScope.$watch('nu.aliment', function(newValue) {
 			console.log('watch nu.aliment', newValue);
+			$('#body').scrollTop(0);
 			if (newValue != undefined) {
 				$state.go('aliment', { alimentName: niceUri($rootScope.nu.aliment)});
 			} else {
