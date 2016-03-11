@@ -46,7 +46,7 @@
 				element.append(input);
 				$compile(input)(scope);
 				
-				var template = (attrs.template) ? attrs.template : 'popup/search.html';
+				var template = (attrs.template) ? attrs.template : 'jlg-typeahead/tmpl/popup-item.html';
 				var popup = angular.element('<div ng-show="isPopupVisible" class="jlg-typeahead-popup"></div>');
 				popup.append('<div ng-repeat="$item in source | filter: inputValue track by $index" ng-click="selectItem()" jlg-active><span ng-include="\'' + template + '\'"></span></div>');
 				popup.append('<div ng-show="noResultFound" class="noResultFound">Aucun résultat trouvé</div>');
