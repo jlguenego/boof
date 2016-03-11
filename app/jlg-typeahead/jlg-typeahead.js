@@ -149,7 +149,7 @@
 				
 				scope.remove = function() {
 					console.log('close', scope, ctrl);
-					ctrl.$setViewValue('');
+					ctrl.$setViewValue(undefined);
 					ctrl.$commitViewValue();
 					scope.isInputVisible = true;
 					scope.isPopupVisible = false;

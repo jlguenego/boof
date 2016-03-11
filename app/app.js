@@ -63,11 +63,16 @@
 			return encodeURI(result);
 		};
 		
-		$rootScope.viewAliment = function() {
-			console.log('viewAliment');
-			$state.go('aliment', { alimentName: niceUri($rootScope.nu.aliment)});
+		$rootScope.$watch('nu.aliment', function(newValue) {
+			console.log('watch nu.aliment', newValue);
+			if (newValue != undefined) {
+				$state.go('aliment', { alimentName: niceUri($rootScope.nu.aliment)});
+			} else {
+				$state.go('home', {});
+			}
 			$('#body').scrollTop(0);
-		};
+			
+		});
 		
 		
 	}]);
