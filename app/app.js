@@ -11,7 +11,10 @@
 		$stateProvider
 			.state('home', {
 				url: "/",
-				templateUrl: "route/home.html"
+				templateUrl: "route/home.html",
+				controller: ['$rootScope', function($rootScope) {
+					$rootScope.nu.aliment = undefined;
+				}]
 			})
 			.state('aliment', {
 				url: "/aliment/:alimentName",
