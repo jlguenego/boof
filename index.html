@@ -28,9 +28,12 @@
 				</div>
 			</div>
 			<div jlg-layout-container="{size: 50}" class="jlg-searchbar">
-				<jlg-typeahead ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
+				<jlg-typeahead ng-hide="nu.aliment" ng-model="nu.aliment" ng-model-options="{ debounce: 300 }"
 					placeholder="Rechercher un aliment" source="nu.aliments" popup="#popup"
-					template="popup/search.html"></jlg-typeahead>
+					template="jlg-typeahead/tmpl/popup-item.html"></jlg-typeahead>
+				<div class="jlg-searchbar-result">
+					<span ng-click="home()" ng-show="nu.aliment">&lt; Voir d'autres aliments</span>
+				</div>
 			</div>
 			<div jlg-layout-container class="body" id="body">
 				<div id="popup"></div>
