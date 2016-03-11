@@ -155,6 +155,14 @@
 					scope.isPopupVisible = false;
 					element.removeClass('tag-visible');
 				};
+				
+				scope.$watch('value', function(newValue, oldValue) {
+					console.log('watch value', newValue, oldValue);
+					if (oldValue != undefined && newValue == undefined) {
+						console.log('watch value: about to remove');
+						scope.remove();
+					}
+				});
 			}
 		};
 	}]);
