@@ -1,13 +1,20 @@
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
+
 var del = require('del');
-var useref = require('gulp-useref');
-var gulpif = require('gulp-if');
+
+var htmlreplace = require('gulp-html-replace');
+
 var uglify = require('gulp-uglify');
-var minifyCss = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
+var concat = require('gulp-concat');
 var templateCache = require('gulp-angular-templatecache');
-var inject = require('gulp-inject');
 var ghPages = require('gulp-gh-pages');
 
+var through = require('through2');
+var File = require('vinyl');
+var mapStream = require('map-stream');
+var vfs = require('vinyl-fs');
 
 gulp.task('default', ['html', 'data', 'images', 'fonts']);
 
@@ -17,13 +24,15 @@ var template = ['app/jlg-typeahead/tmpl/popup-item.html', 'app/menu/**/*.html', 
 var images = ['app/**/*.ico', 'app/**/*.png'];
 var fonts = ['bower_components/bootstrap/dist/fonts/*'];
 var data = ['app/**/*.json', 'app/**/*.csv'];
+var css = 'app/**/*.css';
+var js = 'app/**/*.js';
 
 // Delete the dist directory
 gulp.task('clean', function() {
 	return del(dist);
 });
 
-gulp.task('template', ['clean'], function() {
+gulp.task('template', function() {
 	return gulp.src(template, {base: 'app'})
 		.pipe(templateCache({ base: function(file) {		
 			return file.relative;
@@ -31,35 +40,107 @@ gulp.task('template', ['clean'], function() {
 		.pipe(gulp.dest(dist));
 });
 
-gulp.task('images', ['clean'], function() {
+gulp.task('images', function() {
 	return gulp.src(images)
 		.pipe(gulp.dest(dist));
 });
 
-gulp.task('fonts', ['clean'], function() {
+gulp.task('fonts', function() {
 	return gulp.src(fonts, { base: 'bower_components/bootstrap/dist' })
 		.pipe(gulp.dest(dist));
 });
 
-gulp.task('data', ['clean'], function() {
+gulp.task('data', function() {
 	return gulp.src(data)
 		.pipe(gulp.dest(dist));
 });
 
-gulp.task('html', ['clean', 'template'], function() {
-	
+gulp.task('css', function() {
+	return gulp.src(css)
+		.pipe(cleanCSS())
+		.pipe(concat('css/style.min.css'))
+		.pipe(gulp.dest(dist));
+});
+
+gulp.task('js', function() {
+	return gulp.src(js)
+		.pipe(mapStream(log('about to uglify')))
+		//.pipe(uglify())
+		.pipe(concat('app.min.js'))
+		.pipe(gulp.dest(dist));
+});
+
+var log = function(message) {
+	return function(file, cb) {
+		console.log(message, file.path);
+		cb(null, file);
+	};
+};
+
+gulp.task('vendors', function() {
 	return gulp.src(html)
-		.pipe(inject(gulp.src([dist + '/templates.js'], {read: false}), {addRootSlash: false, ignorePath: dist}))
-		.pipe(useref())
-		.pipe(gulpif('*.js', uglify()))
-		.pipe(gulpif('*.css', minifyCss()))
+		.pipe(through.obj(function(file, encoding, callback) {
+			console.log('File ', file, encoding);
+			
+			var contents = file.contents.toString(encoding);
+			console.log('File content:', contents);
+			var lines = contents.split('\n');
+			var r = new RegExp('.*<script.*src="(.*bower_component.*?)".*?></script>.*');
+			var scripts = [];
+			for (var i = 0; i < lines.length; i++) {
+				var e = r.exec(lines[i]);
+				if (e != null) {
+					scripts.push(e[1]);
+				}
+			}
+			console.log('scripts:', scripts);
+			var self = this;
+			vfs.src(scripts, {cwd: 'app/'})
+				.pipe(through.obj(function(file, enc, cb) {
+					console.log('Vendor scripts:', file.path);
+					self.push(file);
+					cb(null, file);
+				}, function() {
+					console.log('end of stream:', arguments);
+					callback();
+				}));
+		}))
+		.pipe(mapStream(log('about to uglify')))
+		.pipe(uglify())
+		.pipe(mapStream(log('about to concat')))
+		.pipe(concat('vendors.min.js'))
+		.pipe(gulp.dest(dist));
+});
+
+gulp.task('html', function() {
+	return gulp.src(html)
+		.pipe(htmlreplace({
+			js: ['vendors.min.js', 'app.min.js', 'templates.js'],
+			css: 'css/style.min.css'
+		}))
 		.pipe(gulp.dest(dist));
 });
 
 gulp.task('deploy', function() {
-  return gulp.src('./dist/**/*')
-    .pipe(ghPages({ cacheDir: '../.publish_boof'}));
+	return gulp.src('./dist/**/*')
+		.pipe(ghPages({ cacheDir: '../.publish_boof'}));
 });
+
+gulp.task('build', ['data', 'images', 'fonts', 'html', 'css', 'js', 'template' ], function() {
+	console.log('building build');
+});
+
+gulp.task('rebuild', function() {
+	runSequence('clean', 'vendors', 'build');
+});
+
+gulp.task('watch', function() {
+	var watcher = gulp.watch('app/**/*', ['build']);
+	watcher.on('change', function(event) {
+		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+	});
+});
+
 
 
 
