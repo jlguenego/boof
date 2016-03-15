@@ -11,7 +11,8 @@
 		<title ng-bind="title">Boof !</title>
 		<link rel="icon" href="favicon.ico?x" />
 		
-		<link rel="stylesheet" href="css/boof.min.css">
+		<link rel="stylesheet" href="css/vendors.min.css">
+		<link rel="stylesheet" href="css/style.min.css">
 	</head>
 
 	<body ng-controller="jlg-menu.Ctrl as menu" ng-cloak>
@@ -46,9 +47,8 @@
 		
 		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
 
-		<script src="boof.min.js"></script>
-		<!-- inject:js -->
+		<script src="vendors.min.js"></script>
+		<script src="app.min.js"></script>
 		<script src="templates.js"></script>
-		<!-- endinject -->
 	</body>
 </html>
