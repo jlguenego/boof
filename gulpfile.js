@@ -3,6 +3,7 @@ var $ = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var del = require('del');
 var through = require('through2');
+var open = require('open');
 
 
 var getScripts = require('./gulp-get-scripts');
@@ -114,11 +115,15 @@ gulp.task('vendors', function() {
 	runSequence('vendors:css', 'vendors:js');
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['start'], function() {
 	var watcher = gulp.watch('app/**/*', ['build']);
 	watcher.on('change', function(event) {
 		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 	});
+});
+
+gulp.task('start', function () {
+	open('http://jlguenego.github.io/boof/');
 });
 
 
