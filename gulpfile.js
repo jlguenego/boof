@@ -1,19 +1,8 @@
 var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
-
 var del = require('del');
-
-var htmlreplace = require('gulp-html-replace');
-
-var uglify = require('gulp-uglify');
-var cleanCSS = require('gulp-clean-css');
-var concat = require('gulp-concat');
-var templateCache = require('gulp-angular-templatecache');
-var ghPages = require('gulp-gh-pages');
-
-
-var File = require('vinyl');
-var mapStream = require('map-stream');
+var through = require('through2');
 
 
 var getScripts = require('./gulp-get-scripts');
@@ -36,7 +25,7 @@ gulp.task('clean', function() {
 
 gulp.task('template', function() {
 	return gulp.src(template, {base: 'app'})
-		.pipe(templateCache({ base: function(file) {		
+		.pipe($.angularTemplatecache({ base: function(file) {		
 			return file.relative;
 		}}))
 		.pipe(gulp.dest(dist));
@@ -60,48 +49,48 @@ gulp.task('data', function() {
 gulp.task('css', function() {
 	return gulp.src(html)
 		.pipe(getScripts('.*<link.*target="app".*rel="stylesheet".*href="(.*?)".*/>'))
-		.pipe(cleanCSS())
-		.pipe(concat('css/style.min.css'))
+		.pipe($.cleanCss())
+		.pipe($.concat('css/style.min.css'))
 		.pipe(gulp.dest(dist));
 });
 
 gulp.task('js', function() {
 	return gulp.src(html)
 		.pipe(getScripts('.*<script.*target="app".*src="(.*.*?)".*?></script>.*'))
-		.pipe(mapStream(log('about to uglify')))
-		.pipe(uglify())
-		.pipe(concat('app.min.js'))
+		.pipe(log('about to uglify'))
+		.pipe($.uglify())
+		.pipe($.concat('app.min.js'))
 		.pipe(gulp.dest(dist));
 });
 
 var log = function(message) {
-	return function(file, cb) {
+	return through.obj(function(file, encoding, callback) {
 		//console.log(message, file.path);
-		cb(null, file);
-	};
+		callback(null, file);
+	});
 };
 
 gulp.task('vendors:css', function() {
 	return gulp.src(html)
 		.pipe(getScripts('.*<link.*target="vendors".*rel="stylesheet".*href="((.*bower_component.*?))" />'))
-		.pipe(cleanCSS())
-		.pipe(concat('css/vendors.min.css'))
+		.pipe($.cleanCss())
+		.pipe($.concat('css/vendors.min.css'))
 		.pipe(gulp.dest(dist));
 });
 
 gulp.task('vendors:js', function() {
 	return gulp.src(html)
 		.pipe(getScripts('.*<script.*target="vendors".*src="(.*bower_component.*?)".*?></script>.*'))
-		.pipe(mapStream(log('about to uglify')))
-		.pipe(uglify())
-		.pipe(mapStream(log('about to concat')))
-		.pipe(concat('vendors.min.js'))
+		.pipe(log('about to uglify'))
+		.pipe($.uglify())
+		.pipe(log('about to concat'))
+		.pipe($.concat('vendors.min.js'))
 		.pipe(gulp.dest(dist));
 });
 
 gulp.task('html', function() {
 	return gulp.src(html)
-		.pipe(htmlreplace({
+		.pipe($.htmlReplace({
 			js: ['vendors.min.js', 'app.min.js', 'templates.js'],
 			css: ['css/vendors.min.css', 'css/style.min.css']
 		}))
@@ -110,7 +99,7 @@ gulp.task('html', function() {
 
 gulp.task('deploy', function() {
 	return gulp.src('./dist/**/*')
-		.pipe(ghPages({ cacheDir: '../.publish_boof'}));
+		.pipe($.ghPages({ cacheDir: '../.publish_boof'}));
 });
 
 gulp.task('build', ['data', 'images', 'fonts', 'html', 'css', 'js', 'template' ], function() {
