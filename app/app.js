@@ -26,12 +26,12 @@
 					var $state = $injector.get('$state');
 					console.log('instantiate aliment ctrl', $stateParams);
 					console.log('$stateParams.alimentURI', $stateParams.alimentURI);
-					if ($stateParams.alimentURI == '') {
+					if ($stateParams.alimentURI === '') {
 						console.log('exit from aliment ctrl');
 						return;
 					}
 					$rootScope.nu.aliment = $rootScope.nu.getAlimentFromURI($stateParams.alimentURI);
-					if ($rootScope.nu.aliment == undefined) {
+					if ($rootScope.nu.aliment === undefined) {
 						$state.go('home', {});
 					}
 					console.log('$rootScope.nu.aliment', $rootScope.nu.aliment);
@@ -82,7 +82,7 @@
 		$rootScope.$watch('nu.aliment', function(newValue) {
 			console.log('watch nu.aliment', newValue);
 			$('#body').scrollTop(0);
-			if (newValue != undefined) {
+			if (newValue !== undefined) {
 				var uri = $rootScope.nu.getURIFromAliment($rootScope.nu.aliment);
 				$state.go('aliment', { alimentURI: uri});
 			} else {
@@ -105,7 +105,7 @@
 					var parentHeight = element.parent().height();
 					var height = parentHeight - 50;
 					element.css('height', height + 'px');
-				}
+				};
 				
 				angular.element($window).on('resize', refresh);
 				refresh();

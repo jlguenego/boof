@@ -58,6 +58,8 @@ gulp.task('css', function() {
 gulp.task('js', function() {
 	return gulp.src(html)
 		.pipe(getScripts('.*<script.*target="app".*src="(.*.*?)".*?></script>.*'))
+		.pipe($.jshint())
+		.pipe($.jshint.reporter('jshint-stylish'))
 		.pipe(log('about to uglify'))
 		.pipe($.uglify())
 		.pipe($.concat('app.min.js'))
@@ -115,7 +117,7 @@ gulp.task('vendors', function() {
 	runSequence('vendors:css', 'vendors:js');
 });
 
-gulp.task('watch', ['start'], function() {
+gulp.task('watch', function() {
 	var watcher = gulp.watch('app/**/*', ['build']);
 	watcher.on('change', function(event) {
 		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
