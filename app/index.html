@@ -4,24 +4,24 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		
+
 		<link rel="apple-touch-icon" href="favicon.png">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
-		
+
 		<title ng-bind="title">Boof !</title>
 		<link rel="icon" href="favicon.ico?x" />
-		
+
 		<!-- build:css -->
 		<link target="vendors" rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
 		<link target="vendors" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
 		<link target="vendors" rel="stylesheet" href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
 		<link target="vendors" rel="stylesheet" href="../bower_components/json-formatter/dist/json-formatter.min.css" />
-		
+
 		<link target="app" rel="stylesheet" href="jlg-menu/style.css" />
 		<link target="app" rel="stylesheet" href="jlg-typeahead/style.css" />
 		<link target="app" rel="stylesheet" href="jlg-checkbox/style.css" />
 		<link target="app" rel="stylesheet" href="jlg-layout/style.css" />
-		
+
 		<link target="app" rel="stylesheet" href="style.css" />
 		<!-- endbuild -->
 	</head>
@@ -50,12 +50,12 @@
 			<div jlg-layout-container class="body" id="body">
 				<div id="popup"></div>
 				<div ui-view></div>
-				
+
 			</div>
 		</div>
-		
-		
-		
+
+
+
 		<jlg-menu ctrl="menu" init="menu/main.html" title="Main menu" ng-show="menu.visible"></jlg-menu>
 
 		<!-- build:js -->
@@ -68,6 +68,7 @@
 		<script target="vendors" src="../bower_components/json-formatter/dist/json-formatter.js"></script>
 		<script target="vendors" src="../bower_components/fastclick/lib/fastclick.js"></script>
 		<script target="vendors" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+		<script target="vendors" src="../bower_components/lovefield/dist/lovefield.js"></script>
 		<script target="app" src="app.js"></script>
 		<script target="app" src="jlg-menu/jlg-menu.js"></script>
 		<script target="app" src="jlg-responsive/jlg-responsive.js"></script>

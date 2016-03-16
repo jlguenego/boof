@@ -15,6 +15,7 @@
     "papaparse": "4.1.2",
     "json-formatter": "0.4.2",
     "fastclick": "1.0.6",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "lovefield": "^2.1.7"
   }
 }
