@@ -102,14 +102,12 @@
 			var panel = frame.children().eq(panels.length - 1);
 			var previousPanel = frame.children().eq(panels.length - 2);
 			animateAsync(panel, 0, panel.width());
-			return animateAsync(previousPanel, -previousPanel.width(), 0).then(function() {
-				frame.children().eq(panels.length - 1).remove();
-				panels.pop();
-			});
+			return animateAsync(previousPanel, -previousPanel.width(), 0)
+				.then(function() {
+					frame.children().eq(panels.length - 1).remove();
+					panels.pop();
+				});
 		};
-
-
-
 	}]);
 
 	app.directive('jlgMenu', ['$injector', function($injector) {
