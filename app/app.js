@@ -76,7 +76,6 @@
 		$rootScope.moreResults = function(aliment) {
 			console.log('$rootScope.moreResults', aliment);
 		};
-		
 
 		$rootScope.home = function(aliment) {
 			$('#body').scrollTop(0);

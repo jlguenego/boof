@@ -1,4 +1,6 @@
 (function() {
+    'use strict';
+    
     var defaultDiacriticsRemovalMap = [
         {'base':'A', 'letters':'\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F'},
         {'base':'AA','letters':'\uA732'},
@@ -97,8 +99,8 @@
     }
 
     function removeDiacritics(str) {
-        return str.replace(/[^\u0000-\u007E]/g, function(a) { 
-           return diacriticsMap[a] || a; 
+        return str.replace(/[^\u0000-\u007E]/g, function(a) {
+           return diacriticsMap[a] || a;
         });
     }
 
@@ -106,12 +108,12 @@
 		var result = removeDiacritics(uri).replace(/[^a-zA-Z0-9]+/g, '-');
 		return encodeURI(result);
 	};
-	
+
 	var app = angular.module('jlg-misc', []);
-	
+
 	app.value('misc', {
 		niceURI: niceURI,
 		removeDiacritics: removeDiacritics
 	});
-	
+
 })();
