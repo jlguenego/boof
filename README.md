@@ -3,5 +3,6 @@
 Web site for easily querying a nutritional database.
 Database ANSES CIQUAL (France)
 
-Jean-Louis GUENEGO ©2016
+Made with editor Atom.
 
+Jean-Louis GUENEGO ©2016
