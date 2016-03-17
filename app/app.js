@@ -6,7 +6,7 @@
 
 	angular.module('templates', []);
 
-
+	var kiki_keke = 0;
 
 	app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		$urlRouterProvider.otherwise('/');
