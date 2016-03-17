@@ -26,7 +26,7 @@ gulp.task('clean', function() {
 
 gulp.task('template', function() {
 	return gulp.src(template, {base: 'app'})
-		.pipe($.angularTemplatecache({ base: function(file) {		
+		.pipe($.angularTemplatecache({ base: function(file) {
 			return file.relative;
 		}}))
 		.pipe(gulp.dest(dist));
@@ -60,6 +60,8 @@ gulp.task('js', function() {
 		.pipe(getScripts('.*<script.*target="app".*src="(.*.*?)".*?></script>.*'))
 		.pipe($.jshint())
 		.pipe($.jshint.reporter('jshint-stylish'))
+		.pipe($.jscs())
+        .pipe($.jscs.reporter())
 		.pipe(log('about to uglify'))
 		.pipe($.uglify())
 		.pipe($.concat('app.min.js'))
@@ -105,7 +107,7 @@ gulp.task('deploy', function() {
 		.pipe($.ghPages({ cacheDir: '../.publish_boof'}));
 });
 
-gulp.task('build', ['data', 'images', 'fonts', 'html', 'css', 'js', 'template' ], function() {
+gulp.task('build', ['data', 'images', 'fonts', 'html', 'css', 'js', 'template'], function() {
 	console.log('building build');
 });
 
@@ -124,11 +126,6 @@ gulp.task('watch', function() {
 	});
 });
 
-gulp.task('start', function () {
+gulp.task('start', function() {
 	open('http://jlguenego.github.io/boof/');
 });
-
-
-
-
-

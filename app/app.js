@@ -6,22 +6,20 @@
 
 	angular.module('templates', []);
 
-	var kiki_keke = 0;
-
 	app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		$urlRouterProvider.otherwise('/');
 		$stateProvider
 			.state('home', {
-				url: "/",
-				templateUrl: "route/home.html",
+				url: '/',
+				templateUrl: 'route/home.html',
 				controller: ['$rootScope', function($rootScope) {
 					console.log('instantiate home ctrl');
 					$rootScope.nu.aliment = undefined;
 				}]
 			})
 			.state('aliment', {
-				url: "/aliment/:alimentURI",
-				templateUrl: "route/aliment.html",
+				url: '/aliment/:alimentURI',
+				templateUrl: 'route/aliment.html',
 				controller: ['$injector', function($injector) {
 					var $rootScope = $injector.get('$rootScope');
 					var $stateParams = $injector.get('$stateParams');
@@ -50,7 +48,7 @@
 		$rootScope.debug = 'none';
 
 		$rootScope.cfg = $rootScope.cfg || {};
-		$rootScope.cfg.isTop = ! $rootScope.cfg.isMobile;
+		$rootScope.cfg.isTop = !$rootScope.cfg.isMobile;
 
 		$rootScope.$watch('cfg.isTop', function() {
 			console.log('watch cfg.isTop');

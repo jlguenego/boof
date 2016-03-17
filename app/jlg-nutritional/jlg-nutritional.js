@@ -7,7 +7,7 @@
 		var result = [];
 		for (var key in object) {
 			if (object.hasOwnProperty(key)) {
-				result.push({'key': key, 'value': object[key]});
+				result.push({key: key, value: object[key]});
 			}
 		}
 		return result.sort(function(a, b) { return a.key > b.key ? -1 : 1; });
@@ -38,7 +38,7 @@
 
 		$http.get('jlg-nutritional/data.csv').then(function(response) {
 			$rootScope.csv = Papa.parse(response.data, {
-				header: true,
+				header: true
 			});
 			$rootScope.csv.data = $rootScope.csv.data.filter(function(n) { return n.ORIGFDNM !== undefined; });
 
