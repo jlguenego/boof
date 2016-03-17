@@ -60,7 +60,7 @@
 
 
 			},
-			controller: ['$scope', '$injector', function ($scope, $injector) {
+			controller: ['$scope', '$injector', function($scope, $injector) {
 				console.log('instanciation of the jlgLayout container. Scope=', $scope);
 				this.containers = [];
 				this.unspecifiedSizeCounter = 0;

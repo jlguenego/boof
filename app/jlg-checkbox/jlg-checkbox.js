@@ -49,7 +49,7 @@
 
 				scope.set = function(ngModel) {
 
-					var n = ngModel.replace(/(:|\.|\[|\]|,)/g, "\\$1");
+					var n = ngModel.replace(/(:|\.|\[|\]|,)/g, '\\$1');
 					var span = angular.element('#jlg-checkbox-' + n + ' span');
 					if (scope.$eval(ngModel)) {
 						animate(span, left, right, function() {
