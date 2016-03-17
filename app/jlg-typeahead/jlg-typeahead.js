@@ -80,6 +80,7 @@
 					if (scope.isMouseInPopup) {
 						return;
 					}
+
 					// scope.doNotRemovePopup = true for managing the use case
 					// where it is a popup touchstart from a mobile.
 					if (scope.doNotRemovePopup) {
@@ -175,6 +176,7 @@
 				};
 
 				element.bind('mouseenter', selectFn);
+
 				// for tactile interface
 				element.bind('touchstart', selectFn);
 
