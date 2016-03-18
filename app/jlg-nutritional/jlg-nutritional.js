@@ -3,17 +3,6 @@
 
 	var app = angular.module('jlg-nutritional', ['jlg-misc']);
 
-	var object2array = function(object) {
-		var result = [];
-		for (var key in object) {
-			if (object.hasOwnProperty(key)) {
-				result.push({key: key, value: object[key]});
-			}
-		}
-		return result.sort(function(a, b) { return a.key > b.key ? -1 : 1; });
-	};
-
-
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
 		var $http = $injector.get('$http');
@@ -56,15 +45,12 @@
 				$rootScope.nu.alimentData = $rootScope.csv.data.find(function(n) { return n.ORIGFDNM === $rootScope.nu.aliment; });
 				console.log('$rootScope.nu.aliment', $rootScope.nu.aliment);
 				console.log('$rootScope.nu.alimentData', $rootScope.nu.alimentData);
-				$rootScope.nu.alimentDataTable = object2array($rootScope.nu.alimentData);
+				$rootScope.nu.alimentDataTable = misc.object2array($rootScope.nu.alimentData);
 			});
 		}).catch(function(error) {
 			console.error('error', error);
 		});
-
-
 	}]);
-
 
 	app.directive('jlgNutritionalTable', ['$injector', function($injector) {
 		var $compile = $injector.get('$compile');
@@ -77,7 +63,5 @@
 				'<tr ng-repeat="a in nu.alimentDataTable"><td>{{a.key}}</td><td>{{a.value}}</td></tr></table>'
 		};
 	}]);
-
-
 
 })();

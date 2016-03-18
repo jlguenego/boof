@@ -109,11 +109,22 @@
 		return encodeURI(result);
 	};
 
+	var object2array = function(object) {
+		var result = [];
+		for (var key in object) {
+			if (object.hasOwnProperty(key)) {
+				result.push({key: key, value: object[key]});
+			}
+		}
+		return result.sort(function(a, b) { return a.key > b.key ? -1 : 1; });
+	};
+
 	var app = angular.module('jlg-misc', []);
 
 	app.value('misc', {
 		niceURI: niceURI,
-		removeDiacritics: removeDiacritics
+		removeDiacritics: removeDiacritics,
+		object2array: object2array
 	});
 
 })();
