@@ -24,17 +24,17 @@
 		var promise = $q.when('start');
 		var tableMap = {};
 
-		this.declareTable = function(name, element) {
+		this.declareTable = function(name, scope, element) {
 			var csvName = './csv/' + name + '.csv';
 			promise = promise.then(function() {
 				return $http.get(csvName);
 			}).then(function(response) {
-				var csv = Papa.parse(response.data, {
+				var p = Papa.parse(response.data, {
 					header: true,
 					skipEmptyLines: true
-				}).data;
-				console.log('csv', csv);
-				console.log('name', name);
+				});
+				var csv = p.data;
+				var fields = p.meta.fields;
 				var table = schemaBuilder.createTable(name);
 				for (var key in csv[0]) {
 					if (csv[0].hasOwnProperty(key)) {
@@ -45,7 +45,8 @@
 				table = table.addPrimaryKey(['id']);
 				tableMap[name] = {
 					csv: csv,
-					element: element
+					scope: scope,
+					fields: fields
 				};
 			}).catch(function(error) {
 				console.error('error', error);
@@ -69,7 +70,8 @@
 								console.log('row', row);
 								return table.createRow(row);
 							});
-							var element = tableMap[tableName].element;
+							var scope = tableMap[tableName].scope;
+							var fields = tableMap[tableName].fields;
 							promise = promise.then(function() {
 								console.log('about to insert', rows);
 								return db.insertOrReplace().into(table).values(rows).exec();
@@ -81,8 +83,10 @@
 									console.log('selected row', row);
 
 								});
-								element.text(angular.toJson(results));
-								return true;
+								scope.data = {
+									fields: fields,
+									contents: results
+								};
 							});
 						})();
 					}
@@ -93,7 +97,12 @@
 				});
 			});
 
+			var makeTable = function(array) {
+				var result = '';
+				var header = angular.element('<tr></tr>');
 
+				return angular.toJson(array);
+			};
 
 
 		};
@@ -130,7 +139,31 @@
 			link: function(scope, element, attrs, ctrl) {
 				console.log('link jlgTable', arguments);
 				console.log('about to create table', attrs.jlgTable);
-				ctrl.declareTable(attrs.jlgTable, element);
+				ctrl.declareTable(attrs.jlgTable, scope, element);
+
+				scope.$watch('data', function() {
+					console.log('data updated', scope.data);
+					element.html('');
+					if (scope.data === undefined || scope.data.fields === undefined) {
+						return;
+					}
+
+					var elt = angular.element('<table class="table"></table>');
+					var tr = angular.element('<tr></tr>');
+					for (var i = 0; i < scope.data.fields.length; i++) {
+						tr.append('<th>' + scope.data.fields[i] + '</th>');
+					}
+					elt.append(tr);
+					for (var i = 0; i < scope.data.contents.length; i++) {
+						var row = angular.element('<tr></tr>');
+						for (var j = 0; j < scope.data.fields.length; j++) {
+							row.append('<td>' + scope.data.contents[i][scope.data.fields[j]] + '</td>');
+						}
+						elt.append(row);
+					}
+					element.append(elt);
+					$compile(element.contents())(scope);
+				}, true);
 			}
 		};
 	}]);
