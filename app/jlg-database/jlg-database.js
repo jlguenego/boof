@@ -7,90 +7,87 @@
 		var $rootScope = $injector.get('$rootScope');
 		var $document = $injector.get('$document');
 		var $window = $injector.get('$window');
-		console.log('loading jlg-database');
+		console.log('running module jlg-database');
+
 
 
 	}]);
 
-	app.factory('jlg-database.db', ['$injector', function($injector) {
+	var ctrl = ['$scope', '$element', '$attrs', '$injector', function($scope, $element, $attrs, $injector) {
+		var $q = $injector.get('$q');
 		var $http = $injector.get('$http');
 
-		console.log('instanciating the service kiki');
+		console.log('starting jlg-schema controller ', arguments);
+		indexedDB.deleteDatabase($attrs.jlgSchema);
+		var schemaBuilder = lf.schema.create($attrs.jlgSchema, 1);
+		var db;
+		var promise = $q.when('start');
 
-		var schema = lf.schema.create('jlg-schema', 1);
-
-
-		var tableMap = {};
-
-		var loadTableFromCsv = function(tableName) {
-			var csvFilename = 'csv/' + tableName + '.csv';
-			console.log('loading table from csv file: ', csvFilename);
-			$http.get(csvFilename).then(function(response) {
+		this.declareTable = function(name) {
+			var csvName = './csv/' + name + '.csv';
+			promise = promise.then(function() {
+				return $http.get(csvName);
+			}).then(function(response) {
 				var csv = Papa.parse(response.data, {
 					header: true,
 					skipEmptyLines: true
 				});
 				console.log('csv', csv);
-
-				var table = schema.createTable(tableName);
-				console.log('table created', tableName);
+				console.log('name', name);
+				var table = schemaBuilder.createTable(name);
 				for (var key in csv.data[0]) {
-					console.log('key', key);
-					table.addColumn(key, lf.Type.STRING);
+					if (csv.data[0].hasOwnProperty(key)) {
+						console.log('adding column ' + key);
+						table = table.addColumn(key, lf.Type.STRING);
+					}
 				}
-				table.addPrimaryKey(['id']);
-				console.log('columns added');
-
-				var db;
-				schema.connect().then(function(myDb) {
-					db = myDb;
-					console.log('connected, get table ', tableName);
-					var table = db.getSchema().table(tableName);
-					var rows = csv.data.map(function(record) {
-						console.log(record);
-						return table.createRow(record);
-					});
-					console.log('rows prepared');
-					return db.insertOrReplace().into(table).values(rows).exec();
-				}).then(function() {
-					console.log('rows inserted');
-				}).catch(function(error) {
-					console.error('db error', error);
-				}).then(function() {
-					db.close();
-				});
-
-				tableMap[tableName] = tableName;
-			}).catch(function(error) {
-				console.error('error', error);
+				table = table.addPrimaryKey(['id']);
 			});
 		};
 
-		var isTableExists = function(tableName) {
-			return tableMap[tableName] !== undefined;
+		this.populate = function() {
+			promise = promise.then(function() {
+				console.log('about to connect');
+				return schemaBuilder.connect({});
+			}).then(function(myDb) {
+				db = myDb;
+				console.log('connected!', db);
+			});
 		};
 
+
+
+	}];
+
+
+	app.directive('jlgSchema', ['$injector', function($injector) {
+		var $compile = $injector.get('$compile');
+		var $q = $injector.get('$q');
+		var $http = $injector.get('$http');
+
 		return {
-			loadTableFromCsv:loadTableFromCsv,
-			isTableExists: isTableExists,
-			tableMap: tableMap
+			restrict: 'EAC',
+			scope: {},
+			controller: ctrl,
+			link: function(scope, element, attrs, ctrl) {
+				console.log('link jlg-schema', arguments);
+				ctrl.populate();
+			}
 		};
 	}]);
 
 	app.directive('jlgTable', ['$injector', function($injector) {
 		var $compile = $injector.get('$compile');
 		var $q = $injector.get('$q');
-		var db = $injector.get('jlg-database.db');
 
 		return {
 			restrict: 'EAC',
+			require: '^jlgSchema',
+			scope: {},
 			link: function(scope, element, attrs, ctrl) {
-				console.log('link jlgTable', attrs.jlgTable);
-				var request = attrs.jlgTable;
-				var tableName = request;
-				if (!db.isTableExists(tableName)) {
-					db.loadTableFromCsv(tableName);
-				}
+				console.log('link jlgTable', arguments);
+				console.log('about to create table', attrs.jlgTable);
+				ctrl.declareTable(attrs.jlgTable);
 			}
 		};
 	}]);

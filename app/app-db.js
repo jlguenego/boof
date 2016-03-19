@@ -6,7 +6,7 @@
 
 	app.run(['$injector', function($injector) {
 		var $rootScope = $injector.get('$rootScope');
-		var db = $injector.get('jlg-database.db');
+		$rootScope.essai = 'essai truc';
 
 		//db.loadTableFromCsv('csv/Hello.csv');
 	}]);
