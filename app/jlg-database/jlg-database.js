@@ -24,7 +24,7 @@
 		var promise = $q.when('start');
 		var tableMap = {};
 
-		this.declareTable = function(name, scope, element) {
+		this.declareTable = function(name, scope) {
 			var csvName = './csv/' + name + '.csv';
 			promise = promise.then(function() {
 				return $http.get(csvName);
@@ -96,21 +96,8 @@
 					return $q.reject(error);
 				});
 			});
-
-			var makeTable = function(array) {
-				var result = '';
-				var header = angular.element('<tr></tr>');
-
-				return angular.toJson(array);
-			};
-
-
 		};
-
-
-
 	}];
-
 
 	app.directive('jlgSchema', ['$injector', function($injector) {
 		var $compile = $injector.get('$compile');
@@ -139,7 +126,7 @@
 			link: function(scope, element, attrs, ctrl) {
 				console.log('link jlgTable', arguments);
 				console.log('about to create table', attrs.jlgTable);
-				ctrl.declareTable(attrs.jlgTable, scope, element);
+				ctrl.declareTable(attrs.jlgTable, scope);
 
 				scope.$watch('data', function() {
 					console.log('data updated', scope.data);
@@ -148,19 +135,19 @@
 						return;
 					}
 
-					var elt = angular.element('<table class="table"></table>');
+					var elt = angular.element('<table class="table table-striped table-bordered table-hover"></table>');
+					var tbody = angular.element('<tbody></tbody>');
 					var tr = angular.element('<tr></tr>');
 					for (var i = 0; i < scope.data.fields.length; i++) {
 						tr.append('<th>' + scope.data.fields[i] + '</th>');
 					}
-					elt.append(tr);
-					for (var i = 0; i < scope.data.contents.length; i++) {
-						var row = angular.element('<tr></tr>');
-						for (var j = 0; j < scope.data.fields.length; j++) {
-							row.append('<td>' + scope.data.contents[i][scope.data.fields[j]] + '</td>');
-						}
-						elt.append(row);
+					tbody.append(tr);
+					var row = angular.element('<tr ng-repeat="row in data.contents track by $index"></tr>');
+					for (var j = 0; j < scope.data.fields.length; j++) {
+						row.append('<td>{{row["' + scope.data.fields[j] + '"]}}</td>');
 					}
+					tbody.append(row);
+					elt.append(tbody);
 					element.append(elt);
 					$compile(element.contents())(scope);
 				}, true);

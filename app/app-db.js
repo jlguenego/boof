@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var app = angular.module('mainApp', ['ui.bootstrap', 'jlg-database']);
+	var app = angular.module('mainApp', ['jlg-database']);
 
 
 	app.run(['$injector', function($injector) {

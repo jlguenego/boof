@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html ng-app="mainApp">
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
 		<title ng-bind="title">Database test</title>
 		<link rel="icon" href="favicon.ico" />
 
 		<!-- build:css -->
-		<link target="vendors" rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
-		<link target="vendors" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
-		<link target="vendors" rel="stylesheet" href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
+		<link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
 		<!-- endbuild -->
 	</head>
 
-	<body jlg-schema="jlg-schema">
-		<p>Loading file Coucou.csv and transform it to the Coucou table.</p>
-		<p>Loading file Hello.csv and transform it to the Hello table.</p>
-
-		<div jlg-table="Coucou"></div>
-		<div jlg-table="Hello"></div>
-		<div jlg-view="select id, name from Coucou"></div>
-
+	<body>
+		<div class="container-fluid" jlg-schema="jlg-schema">
+			<div class="row">
+				<div class="col-md-4">
+					<table class="table">
+						<tr>
+							<th>id</th>
+							<th>name</th>
+							<th>value</th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>Beurre</td>
+							<td>23</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>Beurre</td>
+							<td>23</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-8">
+					<p>Loading file Coucou.csv and transform it to the Coucou table.</p>
+					<p>Loading file Hello.csv and transform it to the Hello table.</p>
+					<div jlg-table="Coucou"></div>
+					<div jlg-table="Hello"></div>
+					<div jlg-view="select id, name from Coucou"></div>
+				</div>
+			</div>
+		</div>
 		<!-- build:js -->
 		<script target="vendors" src="../bower_components/jquery/dist/jquery.js"></script>
+		<script target="vendors" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script target="vendors" src="../bower_components/papaparse/papaparse.js"></script>
 		<script target="vendors" src="../bower_components/angular/angular.js"></script>
-		<script target="vendors" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		<script target="vendors" src="../bower_components/lovefield/dist/lovefield.js"></script>
 		<script target="app" src="app-db.js"></script>
 		<script target="app" src="jlg-database/jlg-database.js"></script>
