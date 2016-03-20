@@ -135,20 +135,22 @@
 						return;
 					}
 
-					var elt = angular.element('<table class="table table-striped table-bordered table-hover"></table>');
-					var tbody = angular.element('<tbody></tbody>');
+					var table = angular.element('<table class="table table-striped table-bordered table-hover"></table>');
+					var thead = angular.element('<thead></thead>');
 					var tr = angular.element('<tr></tr>');
 					for (var i = 0; i < scope.data.fields.length; i++) {
 						tr.append('<th>' + scope.data.fields[i] + '</th>');
 					}
-					tbody.append(tr);
+					thead.append(tr);
+					var tbody = angular.element('<tbody></tbody>');
 					var row = angular.element('<tr ng-repeat="row in data.contents track by $index"></tr>');
 					for (var j = 0; j < scope.data.fields.length; j++) {
 						row.append('<td>{{row["' + scope.data.fields[j] + '"]}}</td>');
 					}
 					tbody.append(row);
-					elt.append(tbody);
-					element.append(elt);
+					table.append(thead);
+					table.append(tbody);
+					element.append(table);
 					$compile(element.contents())(scope);
 				}, true);
 			}
